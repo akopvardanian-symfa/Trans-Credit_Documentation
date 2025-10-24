@@ -111,11 +111,28 @@ When fixing errors:
 ##### 7. Run Over Limits Check
 Staff member clicks "Run OLIST" button and system checks if customer exceeds coverage limits. For example, if customer already has $50,000 insurance and bank sold another $60,000, then the $100,000 limit is exceeded.
 
+**Business Context - Multiple Policies Active:**
+This process addresses the situation where a customer has multiple active insurance policies that may exceed the agent's coverage limits. Each agent (bank/credit union) has a maximum coverage limit per customer (e.g., $100,000). When a customer takes a new loan and the bank offers insurance, the system must check if the total coverage would exceed the agent's limits.
+
+**Business Logic:**
+- **Agent Coverage Limits**: Each agent has maximum coverage limits per customer
+- **Multiple Policies Problem**: Customer may have existing policies from other banks
+- **Exceeded Limits**: New policy + existing policies > agent's maximum limit
+- **Resolution Required**: Agent must either reduce new coverage or confirm old policies are cancelled
+
 If limit exceeded:
 - **Contact bank** - is old insurance still active
-- **Reduce new coverage** if both are active
-- **Notify customer of reduction** (legal requirement)
+- **If Multiple Policies Active = YES**: Reduce new coverage to stay within limits
+- **If Multiple Policies Active = NO**: Bank can proceed with new policy
+- **Notify customer of reduction** (legal requirement if coverage is reduced)
 - **Bank can keep new insurance** if they cancel old one
+
+**Practical Example:**
+1. Customer John has $50,000 insurance through Bank A
+2. Takes new loan at Bank B for $80,000
+3. Bank B offers $80,000 insurance
+4. System checks: $50,000 + $80,000 = $130,000 > Bank B's $100,000 limit
+5. Bank B must either reduce insurance to $50,000 or confirm Bank A's policy is cancelled
 
 ##### 8. Print Report
 Print main report with financial balance.
