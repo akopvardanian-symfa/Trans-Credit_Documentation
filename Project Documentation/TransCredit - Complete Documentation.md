@@ -288,10 +288,10 @@ The new TransCredit system will be a modern web-based platform that addresses al
 ### New System Architecture
 
 #### Process Diagram - Target Workflow
-![TransCredit Target Process](./Process%20Diagrams/To%20Be/TransCredit%20-%20To%20Be.svg)
+![TransCredit Target Process](./TransCredit%20-%20To%20Be.svg)
 
 #### Architecture Diagram - Target System
-![TransCredit Target Architecture](./Process%20Diagrams/To%20Be/TransCredit%20-%20Architecture%20-%20To%20Be.svg)
+![TransCredit Target Architecture](./TransCredit%20-%20Architecture%20-%20To%20Be.svg)
 
 ### Technology Stack Transformation
 
