@@ -1,0 +1,639 @@
+TransCredit - 2025 09 26 17 14 CEST - Recording
+[Speaker 2]
+Okay.
+[Speaker 1]
+And then a report description.
+[Speaker 2]
+Okay.
+[Speaker 1]
+Now her, we have different report descriptions that we use. If it's manual, we do the month and
+the city. So this one, she put August Bath because that's the city that it's in.
+If it's an e-remit, it'll say August ER. If it's an upload that comes through the website, it'll say
+August Upload. That way everybody knows how we got this.
+[Speaker 2]
+Okay.
+[Speaker 1]
+So then the person that processes this report will go into control and pull up the report
+number.
+[Speaker 2]
+I like the flowers here. Very nice. That's cute.
+[Speaker 1]
+The flowers? Oh, yeah. Those are super old.
+The guy who created this program.
+[Speaker 2]
+Yeah, yeah, yeah.
+[Speaker 1]
+And he used to change it for every holiday that was Easter. I don't know who the appointed set
+
+is, but it's really old.
+[Speaker 2]
+Yeah, yeah, but it's cute.
+[Speaker 1]
+Okay, so it pulls this report up and then we're going to go to input and sometimes we have to
+change these depending on what state we're in or what product we're keying in, but mostly it
+stays right here. So we're going to input the issue. Here is our certificate.
+This one doesn't have a certificate number. That's a printing problem with their platform
+provider. When they don't provide a certificate number, we use the last four digits of the social
+and then we let agent services know, hey, they're not printing certificates, and they reach out to
+the platform and try and fix it.
+So since we don't have a certificate, we use the last four digits of the social. If it was a branch
+and officer, we would see that in. And then here is the ...
+[Speaker 2]
+It's okay. I'm here. Have it your way.
+It's fine. Okay.
+[Speaker 1]
+Cool. Make it safe. ...
+[Speaker 2]
+...
+[Speaker 1]
+...
+[Speaker 2]
+... ... I'm sorry for this.
+I hate it myself, to be honest. Whenever I do this, something wrong happens. ...
+[Speaker 1]
+... This is the code. It's a one.
+We coded a one. Okay Now had they not answered it would be a three and it would kick what
+
+happens on the safe. So so So if they didn't answer health questions, mm-hmm, it would be a
+three and it's going to kick an air Okay, and so when it kicks an air and everything's keyed in We
+exit we were in the snapshot Uh-huh, and you'll see those certificates usually roll down here
+and the runner error list and so many errors we may have Okay, that was an air.
+Okay, then we either reach out to the agent So we need health questions or we clear up
+whatever air most of the errors that happen happen at the bank okay, um, you know the
+customers too old and they can't have insurance or They've not calculated this correctly or a lot
+of times like with net coverage This is your amount finance, but if it's decreasing coverage at
+your total payments, sometimes they put the wrong
+[Speaker 2]
+Amount for the type of coverage right silly and the engine scans it and it's capable of Tria, well,
+it's just capturing those right? Okay, and so then we fix it.
+[Speaker 1]
+So right Here they've answered health questions. We're going to run the snapshot That's
+awesome, so if there's any errors no errors now this is over limits This tells us if the agent if the
+customer has multiple policies at the bank That exceed the age of limits wasn't any So now we
+run this this shows us that here's money and here's the report. It's balanced.
+Nobody owes anything, right? so then we'll print that and Then we print this customer list,
+which tells us who all is on the report. Mm-hmm, and then all of this gets Scanned.
+[Speaker 2]
+Okay. Yes Oh So may I will probably be asking something silly because I'm I'm not that familiar
+with this process at all So what what you just did is Kind of digitalizing And putting into the
+database new Certificate or no Because so far it's just a report that you've been working on and
+then you take All of these certificates are tied to this report, right?
+[Speaker 1]
+This is this bank's monthly totals that they sold for the month of September Okay, this says
+August. Yeah, this is what they've sold for the month of August, right? This is what they owe us
+for their whole month But we have to put it in our system, right?
+[Speaker 2]
+And I mean by our system you mean actually you're going to access and then putting the data
+And then you run snapshots checks and after this there will be a final button that will probably
+Write into the insert data into the database. Am I correct?
+[Speaker 1]
+
+Yeah, I'm really Sorry if I interrupted your process.
+[Speaker 2]
+I'm sorry.
+[Speaker 1]
+I'm just kind of let me show you So, this is a report I did last month that I didn't get to I finished
+it but So here are the errors that happened. Yes These they've collected the wrong premium
+This is the common problem with this agent. It just it's wrong.
+Okay We know that it is because we've calculated it based on the rate in the term and this is
+correct plus this benefits the customers Right and when we make these changes Because the
+agent has paid us this money for what they submitted We make changes that affect that
+balance.
+[Speaker 2]
+All right.
+[Speaker 1]
+All right, we go in here and fix anything that has hit on the error list So this run snapshot what
+that button does which a man does not like the button Yeah, what that button does is it's
+scanning all the certificates for any kind of errors they make once we make changes we don't
+hit that button again because What this is called an exception report. Okay, and this is telling
+the agent all of the changes that we made so We owe them $34 and 67 cents based on the
+adjustments that were right And then here is a screen we go. So When we update in the
+system, it's only updating the numbers, right, um, this is where we have to go in and give Typed
+explanations on what happened now.
+We do have codes But we don't like this. Here's all of our codes. Uh-huh But then we just kind of
+have to plug things in okay, but this just tells the agent What happened?
+[Speaker 2]
+Oh, right.
+[Speaker 1]
+I just got rid of that one. So let me fix that real quick. Sure This is the part that Takes us the
+longest.
+[Speaker 2]
+Mm-hmm Okay, and this is for this certificate. That's the cost.
+
+[Speaker 1]
+Yeah, this was last month and this is for this bank. I Have to decline this person so I haven't got
+to do a letter yet So that's why it's still sitting here because I need to type up the letter and then
+email this billing to the agent. Uh-huh So here is Billings that I sent last month.
+Mm-hmm One of this is something like that So here is an email that I sent to an agent here is
+the Attachment, uh-huh. So it basically says that they owe us 21,000. They didn't send a check
+And there's no exceptions.
+They just didn't send us any money, right? So we're going to report it Okay, and this is kind of
+what we send them. Okay, I Have an agent with exceptions Think that it's rainy outside, but it's
+a machine printer.
+Yeah Okay, that's just one little exception, but there's a letter. Okay So here's the letter that we
+sent one goes to the customer one goes to the agent one goes on file okay, and because we if
+we change life premium disability premium or AD&D we have to legally notify the customer
+that we changed it.
+[Speaker 2]
+Makes sense.
+[Speaker 1]
+So that is a billing that has exceptions Okay If we send these all month I'd like to find one with a
+lot of exceptions Interesting While you're searching may I ask for this So here's a lot of
+exceptions, okay So this agent uses the wrong refund method, okay, they're doing it pro-rata,
+which is actually rule 78 Or actually they're doing rule 78 when it should be pro-rata. So they're
+shorting their customer this much money They're not refunding correctly. So we go and fix all
+of these adjustments, right?
+We send them an additional $15 Which is after commission. Yeah, but they just use the wrong
+refund method and they will not or cannot update their system So there's one of a lot of
+exceptions I wanted you to see
+[Speaker 2]
+and this is interesting because my original impression was that the system that we're going to
+work on and transcredit is specifically devoted to Certificate updates and inserts like basically
+two tasks if a certificate gets updated you do some magic Something I don't know on this part
+of the system and then the database catches it and you know updates the certificates but what
+you're talking about is about exceptions and interactions with third-party, you know, yes people
+and organizations
+[Speaker 1]
+
+So the exceptions that we make which is what we spend most of our time doing either the loan
+officer made a mistake where they put the loan information in their system or their system is
+not doing something correctly or There are platforms out there that just will not Cannot help
+them. Um, so we constantly are getting errors and we can only update them based on state
+regulations Their agreement with plateau What their Certificate this certificate has a lot of
+language in the background that says you're going to refund it this way You're going to do this.
+You're going to do that So we have to go through all of those legal documents and that is what
+we have to make our changes on Okay, because if we get hit with an audit, it has to be correct
+We have to prove it and so the majority of our time is spent fixing what they messed up.
+[Speaker 2]
+Mm-hmm And is it fair to say that? You cannot do anything the certificate unless no errors are
+anymore.
+[Speaker 1]
+So to say well So we have to track exactly what the agent did versus what changes we make
+Okay, so we whoever keys these reports in we kid in exactly we know it's wrong We see a kick.
+We have to just pretend we don't see it Everything is to balance to this because because this is
+exactly Okay, then we have to make all the changes that should have happened.
+[Speaker 2]
+Uh-huh.
+[Speaker 1]
+And here's your difference. We're billing you for the difference We have to show them the
+difference. So we we can't make corrections as we go.
+[Speaker 2]
+Mm-hmm. I see so may I Like rephrase the flow So you get the certificate as is you dump it into
+the system as is or update it as is as and you know Because of your scripts there's something
+might be wrong, but you you dump it into the system and then you start Interacting to fix it
+one. Yeah once it's fixed you go back to the Certificate and update it so that it will get updated
+into the system because originally it was inserted as incorrect or yes So so we key everything
+exactly how it printed on the policy and then everything we balance to these numbers, right?
+[Speaker 1]
+And then once we're balanced, then we start looking at the corrections. Is it an input error? Is it
+something we did wrong as we enter the certificate if that's the case, then we clear that We only
+show the errors that happened here because we fix the input errors if there were any We fix
+those and then we print the error list again After there's no input errors to show the agent.
+
+Here's what happened and then we Update our system the correct amount. We write we Make
+notes on the billing to explain to the agent. Here's why we made the change And then we show
+them we send them a billing with the changes either they are us more money.
+We are more money We do customer letters if it's incorrect because legally we have to notify
+them And the agent will read that billing and they have questions They always want to know
+they read most of them read that billing and they will come back Some of them will come back
+and say What it what did my platform do wrong and they will reach back out to their platform
+and some of them can fix the errors but sometimes they can't or Our system is set up to
+calculate the premium based on monthly payments if The customer came in and did bi-weekly
+payments or annual payments or semi-annual payments It will kick and we have to run a quote.
+Okay, and if we can run a quote Which I had one yesterday If we can run a quote based on the
+annual payments, we force per quote will force the coverage because the premium isn't wrong
+Right.
+It's just our system only calculates monthly because our system doesn't know. Hey, this
+customer is only making one payment in five years, right?
+[Speaker 2]
+Right. Yeah, I get it
+[Speaker 1]
+So this is an agent that they're brand new they just came over the company they were Working
+with quit selling the insurance, but they were using our papers That I don't have it The
+certificate was coming through This was an error that their system is making because they're
+clicking a button that they shouldn't be clicking And that is all that's happening That was the
+brand new agent So this is what we balance to and here are the exceptions and what happened
+was Have it on here It's printing this extra little premium, right? Yeah Yeah, I think because
+they're clicking this box when they're printing this certificate and they can't have that So we
+have some loan documents even though it's just 32 cents. We have to know tell them that
+That's not correct.
+I have to explain that We adjusted it based on that coverage based on the amount financed and
+we have to But keying it in you have to key that in wrong knowing that shouldn't be there to be
+able to track What they did wrong and what you're doing to fix it. Okay, which is kind of what's
+happening here
+[Speaker 2]
+this is very interesting, so it seems like Certificates can go Different amount wise just like on this
+example even by this very little amount They can go change drastically because of the errors all
+years
+
+[Speaker 1]
+So yeah, a lot of agent will print so if the loan has two people on the loan, but they're only
+insuring one person Certificate will print two people even though it's not supposed to So if it
+prints two people and it's single coverage We have to key it in exactly the way it printed
+because this is a legal document So we print it in that way it kicks and then we have to tell this
+customer Hey, there's a printing error.
+Your name printed on here was single coverage You are not insured right so they can't file a
+claim later on right with us. That's something we see a lot But yeah, that's that's the majority of
+what we spend our time doing is fixing What got messed up when these were printed?
+[Speaker 2]
+Okay, got it. So now I'm looking into my some notes. I'm sorry.
+They are in Russian. You're fine But Okay So you are probably in close touch with Eamon. Are
+you?
+Yes, so He's wanting and I'm just trying to understand why he is wanting this because the
+system seems to be okay Maybe it's out of date, but it seems to be working just fine. No, what
+do you think?
+[Speaker 1]
+It's slow But yes, it it does. It's very user-friendly Because it's Excel based right? Yeah.
+Yeah It's very user-friendly but I think I think what they're hoping to do is that they want to
+build a system that fixes these corrections Yes, so my yeah, I'm sorry I'm reading again.
+[Speaker 2]
+I get it. So what what I have here two points is They Wanting to do so first of all, they want to
+migrate this stuff from access to the plateau web service or whatever They call it. Yeah, so it
+doesn't really change from your perspective it's just you will be dealing with another system,
+but it's design is the paper purpose will stay the same for sure, but Here it says they want to
+add more parameters by which you can conduct search for certificate Does it ring a bell to you?
+Anyhow? No, so do you do already conduct some? Do you have a use case where you are
+searching for some certain certificate?
+We search for it here Yeah, and it doesn't have a certificate number in social or customer, right?
+Isn't it already not enough because you've got already comprehensive list of fields. So you are
+satisfied with that, right?
+[Speaker 1]
+
+Yes Yeah, we if we need to search for a certificate
+[Speaker 2]
+I'm just wondering why this this request like if we put in this certificate number
+[Speaker 1]
+And don't put in any other information it's gonna bring up It will bring up all the certificates So
+it's gonna bring up all the certificates that are close to this Yeah, but if we put in the agent if we
+and if we don't know the agent number we can click here let's say So we know the effective date
+if we click here dates, right, right That's who we're looking for like yeah, we have no problem
+searching for certificates it pops right up so this is a little mismatch but
+[Speaker 2]
+I it's just because I don't know the system that but my impression is that this is a necessary
+feature that I mean simpa will be like our company will be doing this but the Like the
+stakeholder is certainly a man and this is the request from him So there is probably something
+behind this decision that I just don't cannot comprehend so far But as of now, it feels like it's a
+little well It's sort of certainly possible, but seems like some other parameters by which you can
+search for the certificate are a little bit but What to say this? Not necessary. So to say just Okay,
+I'll get back to a man on this one because this is interesting and the second thing which is this it
+says Okay, he he suggests that we need to implement the logging of all the occurrences all the
+actions that a user Does to certificates via in this case via the system, for example certificate is
+added certificate is updated and Email has been sent.
+The answer has been received Update corresponding update has been done. You know that
+sort of thing. Is this already implemented somewhat somehow?
+like maybe you don't maybe even know but I'm just wondering because it used to do so many
+interactions and the flow is still like this like in the in the in the Best case scenario gets you
+receive a certificate. You've received a report you go into the system. Everything balances.
+You're happy You sent the email good.
+[Speaker 1]
+So yeah, if we're balanced, we usually don't tell them unless they didn't pay us Yeah, they know
+if they don't care from us. We're good, right?
+[Speaker 2]
+But I can still at least count like five or six actions.
+[Speaker 1]
+
+Yes, we do. We we receive the report We get into the system. We check for errors.
+We print it we build them Yeah, we do all of those things, right?
+[Speaker 2]
+And so he wants to log this like log is just um, it's just a note in the table that says okay This guy
+did this to the certificate.
+[Speaker 1]
+So this is about that basically just to trace the history of all the actions We have a trace Access to
+it So this report number This is what everybody did to it We have that already Yeah, look into
+this the wrong day. So this is when this is a man's daughter. She helped keep this report in.
+[Speaker 2]
+Oh, really?
+[Speaker 1]
+Oh, yeah, she works here part-time. She's not here today But yeah, here's everything she did
+and everything I did in the time and date that we did them Like we have that already wonderful
+that his daughter is what I do. Yes.
+[Speaker 2]
+That's just great. I like it Okay, so the wrong day tells when report number was means which
+report is it related to yes user ID who did this roster Here's what we did so the our list is that
+page that I showed you that we balance to Okay, so On Stay on this report. Mm-hmm This is an
+R list
+[Speaker 1]
+Mm-hmm these numbers input these totals are what we balance to on their report or minutes
+That's the numbers There's no habit, but that's the number that they submitted that we balance
+to and then down here approve this chain this changed by $60 Because of the exception so
+here's what we input and what we totaled you here are the changes the difference was $60
+after commission. It was 35. Okay, and then this screen shows you the $60 difference Okay, why
+it was $60, right?
+[Speaker 2]
+So but getting back to the law to that. Can you go back to this?
+[Speaker 1]
+
+Yeah.
+[Speaker 2]
+Yeah Thank you so much. So that thing doesn't tell you what really happened at this moment
+because it's very high level Don't you think or I mean, I can't say if it wasn't Detail, right? Yeah,
+you're right It doesn't just says that something has occurred and someone did to this at some
+certain point of time but what exactly happened no clue and File ID name or field name.
+[Speaker 1]
+I don't see field name the last So, no, no, I'm not saying it's bad I'm just saying this is a good
+attempt, but probably this is one of the reasons why they want you to expose But once we're
+balanced to their reporter minutes that they submit We if we were to and then we make all
+those changes if we were to Snapshot again and take any of these changes off It would no
+longer balance. So this shows you what changes happened, right?
+[Speaker 2]
+Well, yeah, this is your user experience from which you can tell how you can retrace it But that
+and this is on the admin screen.
+[Speaker 1]
+Not everybody has to okay Okay privilege, but yeah, and then if so every certificate is given
+what's called a cert ID And hi.
+[Speaker 2]
+Yes, right, right.
+[Speaker 1]
+We don't really use this a whole lot but You can use it here Aha, another field that tells you
+everything. I guess nothing happened to that certificate. Yeah, right, okay But it should tell you
+what happened to that certificate Going here because this one has a claim on it.
+So this might be a little more important. Mm-hmm I don't play with this button a lot. No, no,
+that's That's fine.
+[Speaker 2]
+There's nothing and that's just fine, you know, because if you don't use it, it doesn't yeah. No, I
+guess that's not helpful That's good. That's good mmm, I I'm just trying to think why I mean, it's
+not a question to you.
+I'll talk to a man, but still Suppose the old it comes and you would need to understand as quick
+
+as possible. What really happened to a Certificate you must be either very experienced to
+quickly, you know understand what's going on or I've made these. Okay.
+[Speaker 1]
+Um, what's this? So whenever a new agent comes in? I'll work the first report and we make
+notes You know that the person making corrections might need to know and we've told him
+and we have to have this because some of them But Level off premiums may kick run quote
+adjust sentiment letter That's the one where the right extra premium comes in, right?
+So we we make and this tells us which quarter to use Interesting so that this is what you did
+manually typed in. Well, I send it agent services and they add it But I mean not not every I
+haven't had time to do every agent, right? But we've tried to catch most of them But like this
+one does everybody do this like keep keep the track of this wonderful This this is their notes.
+These are the notes that I've sent agent services for this agent Yes, and my goal was to make
+these because right now we have a person assigned to a specific state, right? Because certain
+states have certain rules and regulations and not everybody here notes them. Okay, like North
+Carolina is net plus Three what that means is they are allowed to have three extra payments,
+but that makes the premium kid Uh-huh So the person that does those corrections knows what
+to look for and which one is accepted in which one is it?
+But nobody else who's never done North Carolina knows.
+[Speaker 2]
+Yes state, right?
+[Speaker 1]
+Kentucky has Kentucky taxes for specific some counties add the taxes on the certificate and
+some don't okay So this is the notes we have to make for Kentucky
+[Speaker 2]
+But these notes, I mean who type them like physically you right and so the agent services and
+they plug them into the system Yeah, because it were to Jill to Jill to do it I'm sorry because they
+were attentive and prompt in tracking your things.
+Yeah, if the user is too fast So say my question is it will be blank, right? And if for example what
+it comes you're in trouble because I mean you you're not if you're able still Somehow to trace it
+back, but without these notes It makes it harder very very hard and you could risk making the
+wrong Correction and then you get hit with an audit and that's a problem.
+[Speaker 1]
+
+So not all of them are correct I've told everybody if there's bullets and it says I did it where the
+first couple of lines helps the person open in the mail the second couple of lines helps the
+person processing and then the person doing corrections and then the person sending the
+billing so I kind of have a Yeah, that's great, that's great right and I've tried to do every agent
+but it's always impossible Here is
+[Speaker 2]
+Didn't we get some mess of with the certificates how they were originally if we did I apologize
+maybe you Specific it's here I
+[Speaker 1]
+Don't know Okay, so here's Texas here's the notes I've made for this one So this tells us that it's
+a manual that they upload it through the website and here's their platform providers So we can
+reach out to them if we ever need to So another thing our system currently can't calculate
+based on birthdays According to the certificate for this state They can have life coverage up to
+their 71st birthday and they can have disability up to their 66th birthday Currently when we
+keep a certificate in our system will say they can't have more than 12 months of coverage But
+that's not true We have to go in and calculate when their 76th birthday is and they can have up
+until the day before Okay, sometimes that means they can have 15 months and 28 days. So
+that's an adjustment That's why that note is there, right?
+This tells us that certificates, but this is I think a state regulation. It may be on this on the
+document Certificates have a 30-day free look So what that means is if the agent submits a
+cancellation to us within the first 30 days Our systems telling us no, they can't have that full
+refund. But based on the language on the certificate So I have asked him and if he could
+program it to hey, this is less than 30 days Don't kick that as an error so that's kind of what he's
+wanting to do with his new system is make that not be an error because We already know That
+they can have that Wow little things like that that he's trying to make easier for us.
+I know As I've shown I've talked to him about that too
+[Speaker 2]
+Yeah, so Okay, now this is very interesting and thank you for commenting this because Like yes
+at a high level they certainly want to log all the actions however, I still believe that you won't
+replace because this is I mean this is just Wisdom business wisdom that you have and logs will
+help but they can't replace it to the full extent And this is something that you would still
+probably need to to use
+[Speaker 1]
+Yeah, we've asked him when the new system comes in. Please make these notes.
+
+[Speaker 2]
+Oh, yeah, because we have Right, but I'm pretty sure he will yeah, he's not going to kill it so let
+me look on my end what I have from him and See if it makes sense to you So as far as
+certificate search Here are the list of fields.
+[Speaker 1]
+He wants to add search by first and last name of Whoever he is so far So the question is why is
+it add but I don't think we have a wild card like if you're looking for I'm not sure what wild card
+is what wild card means if you don't know the full spelling Okay, and you just like okay, like say
+we're looking for you and we don't know the full spelling You guys are asterisk or something. It
+pops up. We don't have that.
+Okay, we have to actually write type in the name Is it my surname?
+[Speaker 2]
+I was very close was it S-K-O-L-O-V. Almost, S-O-K, S-O-K-O-L-O-V V in the end. Let's see Why
+man?
+[Speaker 1]
+Well, there's Tatiana.
+[Speaker 2]
+That's my wife. So Well, there's an A at the end Yeah, cuz that's the yeah says the Slavic thing
+girls have A in the end They're female Tatiana. That's my wife's initials.
+What? Cuz they're using underscores. So she has an A at the end of Tatiana that Tanya or
+Tatiana's official name.
+That's why she's Sokolova It's a yeah totally different world. Yeah language, but yeah, well,
+that's I'll let her know she's Well, let's see if it was the same number. Yeah, and then it's okay,
+sorry, it's not you're good Mikhail.
+Okay, that's Michael.
+[Speaker 1]
+Oh, I have the period instead of that. It's really picky.
+[Speaker 2]
+Okay. Yeah And that's Wow Well, that is something. Okay, so search by first name in the last
+name I can see that it's being done.
+
+The question is Probably he meant Tatiana Tatiana It's just crazy No, we don't have one back for
+2018, yeah There is not such cars just old poets So I travel there Yeah Well, it's good I like it
+Maybe not date of birth. This is DOP. I mean the field is there isn't it?
+So it means that this engine kind of expects it to work somehow Another so the thing is why he
+thinks needs to add Probably because it doesn't work. Okay, I think I'll clarify it with him, but I
+think it's just because They already have something on their end Yeah as a web service, but it
+doesn't yet contain everything that this system contains and that's why we are to You know
+migrate or mimic whatever has been done under the hood of This platform and SSN is there as
+well. Yes.
+[Speaker 1]
+Yeah, and we can do four digits, too.
+[Speaker 2]
+Okay Right And it'll pop up everybody because some of our certificates only print four digits,
+okay Yeah, this is what you said, right so Okay, so this is how they want to do now for the for
+the logging table. Just just for your information. It will be like it's a Identification number the
+certain ID that you don't really use then the value that has been changed The old value then
+you about so for example change its value is amount that will be just a premium Yeah, the
+premium so old value $100 new value $200 and then the reason will be also just as a separate
+field Okay, and then when and by whom will this change has been done?
+so Okay. Okay. Oh, right.
+So ever checking is this somehow done? Oh Checks will be determined by review of access and
+sequel code I mean So it like So, I don't know I don't know that that would now I know agent
+services does something called an error check. Yes Yeah, yeah for agents her.
+Yeah.
+[Speaker 1]
+Yeah for that.
+[Speaker 2]
+We don't do that in this department agent service We've got it here and yeah And this will
+replace all of that because Terry right now is working on this as far as I understand She's the
+main subject matter expert, but I think it okay. So Oh And then there's also what they want to
+do They will want to track Communication not only the change requests on the database side
+They will keep everything as far as how which emails which subjects which body in the system
+Yeah, so they will just like big brother watching you Oh, I mean, it's possible there is a
+
+[Speaker 1]
+Currently what I've asked everyone to do is if you've emailed the agent and asked them a
+question about an error Answer it print it and put it with the report and send it to sign because
+I don't want the agent coming back and saying We didn't say that right?
+[Speaker 2]
+Yeah, and they want to work kind of Enhance this routine by you know supporting and all
+together and we will be doing this in our end. Okay. Yeah, I Think okay.
+So team Z's for the later Do you know it? Have you ever worked with the team Z website? It's a
+demilitarized zone, whatever it means, okay I Think it's a good start and we can probably wrap
+up here just because my main goal was again to see what what is the Flow and I see it's it's
+quirkiness in the way that there's a lot of back and forth and it needs to be tracked And it needs
+to be At least replicated if not improved Mm-hmm somehow and we will do our best our
+developers.
+I'm not going to do this luckily Yeah, so when we do our next team's call you want me to have a
+report for you to watch That one go into or do you think you have all you need I think for now I
+have all I need because again, can you say me right now if it's okay to get five more minutes?
+Just what would you do without doing just step one step two step three and that's it Yeah, and
+that will be enough because we want to I think this will just confirm the flow that it's right now
+in my head And we'll see if I got it correctly. So that's what we need So let's just say a new
+certificate starting point.
+Yeah. Yeah, so let's just say this is a new certificate So, how would you approach this?
+[Speaker 1]
+Um a new report? Yeah a new report. Yeah a new report of the new certificate So this is a new
+report So we go in and put in this report number This is something you started with.
+Um, yeah, so this is what Cassie got this morning She gave it a report number put money on it
+So this is and this is what we're gonna balance to they sent one new certificate in Cancellations.
+[Speaker 2]
+Okay, so it will be in certain new certificate plus updates.
+[Speaker 1]
+Um, yeah So these loans paid out early and a customer is do a refund that they tell us how
+much is due back Our system doesn't get like this is what our system says. It should be. This is
+what they're asking for We always put in what they asked for it won't kick unless it's right a lot
+So that's like three dollars off System says it doesn't matter.
+
+Okay, and then here is the new certificate I would do better if you guys just jumped in here and
+watched me Yeah, I'm sorry for this Yeah, Michael said just catch We're all in a real quick issues
+super fast Doing this a while. So we're right in reports pretty fast. Okay, so that's one issue and
+two cancels So this that kind of goes down here.
+So now we look at see if there's any errors. There's no This is over limits to see so this person
+who just says the policy Is this So this tells us he has two policies one he opened in December
+and when he opened in August He can't have more than $100,000 with this agent.
+[Speaker 2]
+Okay.
+[Speaker 1]
+Um, so that's a problem right and So here are your agent limits? They they've signed an
+agreement that they will not sell more than $100,000 right coverage And this person has so
+now what we have to do We have to email the agent And ask if this policy is still active because
+they've exceeded by thirty two thousand five hundred twenty eight dollars So we'll email them
+and say hey this August 2025 policy Is it still active in your system because sometimes they just
+forgot to send us the cancellation. Okay Um, if they forgot they'll send us the cancellation will
+cancel it. They can have this one If that's still active we have to reduce this one right now We're
+in a new loan is seventy five thousand two hundred six dollars and eighty seven or his new loan
+is Seven thousand three hundred twenty one dollars and nineteen cents Because he's
+exceeding it by thirty.
+Oh, it's fifty cents See his new policy is fifty seven thousand three hundred twenty one dollars
+and nineteen cents His old policy seventy five thousand. He's over by thirty two thousand So if
+they're both active we have to reduce this one by thirty two thousand five hundred twenty
+dollars and six cents So we can only ensure twenty four thousand seven hundred ninety three
+dollars and thirteen cents of his August policy If they're both active, right? Um, so when the
+agent comes back and tells us then we reduce it which we always let them know that because
+ensuring 75,000 and changing that to 24,000 Sometimes that that doesn't help the customer
+any because we only insuring a third of their loan Sometimes if the agent has another contract
+with another insurance company, which rarely happens They will tell us to withdraw the policy
+and don't go put it on the other insurance company, right? But most of the time it's active and
+we have to reduce it. So we have a code So let's say let's say what's that?
+This is what we would do if we fixed it So we're going to have to change this to twenty four
+thousand seven hundred ninety three dollars and thirteen cents Eight the system tells us the
+premium will be one thousand six dollars and thirty five cents Now we're going to run these
+over limits again Now you can see we're at the hundred thousand dollars Now it's good But
+now we have to notify the customers. We're going to go here is our changes without any
+explanation Okay We've reduced the benefit.
+
+[Speaker 2]
+We've reduced the premium.
+[Speaker 1]
+So this is the original value the new value. This is the difference See, but now we have to explain
+and we have codes for that which I want to update these codes because they're not
+representative They're not I Don't feel they help the agent understand their internal notes.
+[Speaker 2]
+Yeah, right.
+[Speaker 1]
+I think it's External friendly so it says debtor exceeds cumulative life-filled underwriting limits
+Well, they actually exceed the maximum Because you can exceed cumulative Yeah, meaning
+you just need health questions. Yes, but you because they're under any limits usually less Let's
+say they have a $25,000. That's when they exceed cumulative.
+This is maximum. This is different Maximum and I think build an underwriting now because
+that's just not needed Better exceeds the maximum cumulative underwriting limits Reduce lifebenefit to maximum available so this Language also goes in the customer letter. So it needs to
+be Able for the customer when they get this letter in the mail to understand as well Sometimes
+Sometimes they'll call and ask So here is my Wording to go with what happened wonderful.
+So now this goes to the agent. We'll do a letter And that's if both policies end up being active
+will you add this comment to that?
+[Speaker 2]
+I'm sorry I don't remember which tab it is for the heat with the flowers I mean, are you going to
+leave a note about this there or not yet?
+[Speaker 1]
+No, the reason why is that is Universal across the board all agents.
+[Speaker 2]
+Okay.
+[Speaker 1]
+Um, the only time it isn't is we have So so the notes that we all do Aren't in here. These are
+specific. These are notes for Something say if you process Mississippi and you grab this,
+
+Missouri You can maybe help that person with these specific notes, but all across the board We
+all know if they exceed right the maximum limits on the extraordinary stuff But we do have
+certain states based on the certificate.
+They don't have cumulative coverage Meaning It's a per certificate form, right? So we don't look
+at a cumulative as long as the certificate doesn't exceed and this is really old. It has not been
+updated But this is a little key That we've been trying to keep up with Here's per cert.
+Here's cumulative. So they submit this cert We don't care if they have more than one health
+question. They can they can have yeah, you know, right So again, that's a state some some
+states are different than other states Okay Okay.
+Yeah, that's that's what would happen Wonderful. I mean I enjoyed this session Very clear so
+this shows Here's how much they paid.
+[Speaker 2]
+Uh-huh.
+[Speaker 1]
+The change we made says we owe them six eighty eight seventy eight and That's what this is
+going to total six eighty seventy eight. So we will cut them in check We email them a billing tell
+them hey, we're gonna send you this money back because they're over and then they are
+supposed to Fix it in their system. Okay, they don't always a lot of them are really good about
+making the adjustment the ones who don't When they send us the re when they pay that loan
+out and they send us the refund They'll send it based on the original coverage.
+They're not what we adjusted Yeah, and then again, it's refund caps and then we have to say
+hey we adjusted this I understood understood. Yeah. Well, it's tedious process It is and and I
+thought we spend like 95% of our time doing corrections You know the certificates in the
+system that takes us no time, right?
+That is not what takes up our time It's it's the correction.
+[Speaker 2]
+Well in my speed up. I'm pretty sure it will because the request is from you from So, I mean it's
+good when it's like proactive from those who actually know what needs to be done But not the
+vice versa when somebody Who doesn't really work into this specific area says, okay. This is
+how it should be done because I have some Big understanding.
+Yeah. Yeah, so this is not the case good good. No.
+[Speaker 1]
+
+Yeah No, I appreciate you sitting here and learning this because that will just make the change
+much easier I hope so.
+[Speaker 2]
+Yes. My job right now is to just basically process this again, and I will sync with Amon right now
+to see Hey, so this is how I understood it. Am I correct?
+This is why it's need to be done And yeah, if I come up with some kind of diagram, I'll let you
+know as well. Okay, so Thank you so much. It was a wonderful session.
+[Speaker 1]
+I think we can probably adjourn here Yeah Great I hope whoever watches this video makes
+sense.
+[Speaker 2]
+Oh, yeah. Yeah. No, I mean I I can guarantee
+
+

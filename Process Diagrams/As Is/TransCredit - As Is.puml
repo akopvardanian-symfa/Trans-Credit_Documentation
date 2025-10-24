@@ -1,0 +1,196 @@
+@startuml
+title TransCredit Insurance Certificate Processing Business Process Flow
+
+start
+
+:Receive Monthly Sales Report;
+note right
+  Contains:
+  - Bank's monthly insurance sales
+  - Certificate data (life/disability coverage)
+  - Premium amounts and payments
+  - Customer information
+  - What bank owes for the month
+end note
+
+:Assign Report Number and Description;
+note right
+  Report description types:
+  - Manual processing: "August bath" (city)
+  - e-remit (electronic payment): "August ER" 
+  - Website upload: "August upload"
+  This identifies how the report
+  was processed for tracking
+end note
+
+:Enter Certificate Information into TransCredit System;
+note right
+  CRITICAL: Enter data exactly as printed
+  regardless of whether it's correct or not
+  - Use certificate number if available
+  - Use last 4 digits of SSN if no certificate
+  - Notify Agent Services about printing issues
+end note
+
+:Check Health Questions Status;
+note right
+  Set UwCode for each plan:
+  - UwCode 1 = Health Questions answered
+  - UwCode 3 = Health Questions NOT answered
+  DISABILITY: Can only write if ALL HQs answered
+end note
+
+if (Health questions answered?) then (yes)
+  :Set UwCode = 1;
+else (no)
+  :Set UwCode = 3;
+  :Flag for Agent Follow-up;
+  note right
+    Must contact agent to get
+    health questions answered
+  end note
+endif
+
+:Run Snapshot Validation;
+note right
+  MANUAL ACTION: Click "Run Snapshot" button
+  System scans all certificates for:
+  - Customer age limits (too old for insurance)
+  - Premium calculation errors
+  - Coverage amount mistakes
+  - Wrong refund methods (pro-rata vs Rule 78)
+  - Platform provider errors
+  - Printing errors (extra premiums)
+  - Multiple policy violations
+  Creates Snapshot Certificate/Report
+end note
+
+if (Validation errors found?) then (yes)
+  :Run Error List;
+  note right
+    MANUAL ACTION: View "runner error list"
+    Shows all certificates with errors
+    that need to be fixed
+  end note
+  
+  :Input Data Exactly As Agent Submitted;
+  note right
+    CRITICAL: Enter data exactly as printed
+    even if we know it's wrong
+    Must track what agent submitted vs changes made
+  end note
+  
+  :Balance to Original Report Numbers;
+  note right
+    CRITICAL: Must balance to original report
+    numbers BEFORE making any corrections
+    This shows exact difference between
+    what agent submitted vs correct amounts
+  end note
+  
+  :Create Exception Report;
+  note right
+    Document all changes made:
+    - Premium adjustments
+    - Coverage corrections required
+    - Refund amount changes
+  end note
+  
+  :Update System with Correct Amounts;
+  note right
+    Apply corrections after
+    balancing to original numbers
+  end note
+  
+  :Print Error List Again;
+  note right
+    After fixing input errors,
+    print updated error list to show
+    agent what was corrected
+  end note
+  
+  :Generate Agent Billing;
+  note right
+    Show money owed or returned
+    based on corrections made
+  end note
+  
+  :Notify Agent of Changes;
+  note right
+    Send to agent:
+    - Billing statement
+    - Explanation of corrections
+    - Customer notification letters
+    (if life/disability/AD&D changed)
+  end note
+  
+else (no)
+  :No Validation Issues Found;
+endif
+
+:Run Over Limits Check;
+note right
+  MANUAL ACTION: Click "Run OLIST" button
+  Uses Form ME-SPNLD-HQA (8/12) - cumulative
+  Checks if customer has multiple policies
+  exceeding agent's coverage limits
+  (e.g., $100,000 limit per agent)
+end note
+
+if (Coverage limits exceeded?) then (yes)
+  :Contact Agent for Verification;
+  note right
+    Ask if older policies are still active
+    due to exceeding coverage limits
+  end note
+  
+  if (Multiple policies active?) then (yes)
+    :Reduce New Policy Coverage;
+    note right
+      Calculate maximum allowed coverage
+      based on agent's limits
+    end note
+    
+    :Notify Customer of Reduction;
+    note right
+      Legal requirement to notify customer
+      of benefit and premium reduction
+    end note
+    
+  else (no)
+    :Agent can have this new policy;
+    note right
+      If agent forgot to send cancellation,
+      they will send it and cancel old policy
+    end note
+  endif
+  
+else (no)
+  :Within Coverage Limits;
+endif
+
+:Print Report;
+note right
+  Print the main report
+  showing financial balance
+end note
+
+:Print Customer List;
+note right
+  Create list of all customers
+  on this report
+end note
+
+:Scan All Documents Together;
+note right
+  Scan and file:
+  - Report
+  - Customer list
+  - All supporting documents
+end note
+
+:Complete Monthly Report Processing;
+
+stop
+
+@enduml

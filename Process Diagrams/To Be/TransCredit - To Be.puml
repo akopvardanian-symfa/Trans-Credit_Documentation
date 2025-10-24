@@ -1,0 +1,126 @@
+@startuml
+title TransCredit New System Workflow - Desired State
+
+start
+
+:Receive Agent Report;
+:Store in PlateauGroup.Web Database;
+
+:Enhanced Certificate Search;
+note right
+  New Search Capabilities:
+  - First/Last Name (wildcards)
+  - Birthday
+  - SSN
+  - Claim Number
+end note
+
+:Input Certificate Data;
+:Run Enhanced Error Checking;
+note right
+  Integrated Error Checks:
+  - All Access/SQL validations
+  - Certificate validation
+  - Agent limit verification
+end note
+
+if (Errors found?) then (yes)
+  :Create CertError records;
+  :Generate Agent Communication;
+  
+  :Send Email to Agent;
+  note right
+    Email includes:
+    - AgentReportEmail ID
+    - Spreadsheet attachments
+    - DMZ website link
+    - Specific certificates to fix
+  end note
+  
+  :Copy Data to DMZ Database;
+  :Store AgentReportEmail record;
+  
+  :Agent receives email;
+  :Agent logs into DMZ Website;
+  note right
+    DMZ Features:
+    - Auth0 MFA authentication
+    - View pending reports
+    - Edit certificates
+    - Submit corrections
+  end note
+  
+  :Agent makes corrections;
+  :DMZ system validates changes;
+  
+  if (Agent corrections valid?) then (yes)
+    :Insert OpsLog message;
+    :Notify PlateauGroup.Web user;
+    
+    :User reviews changes;
+    if (Changes approved?) then (yes)
+      :Update apsPlateau tables;
+      :Sync DMZ changes;
+    else (no)
+      :Request additional corrections;
+    endif
+  else (no)
+    :Request agent to fix errors;
+  endif
+  
+  :Monitor Inbound Email;
+  if (Email contains AgentReportEmail ID?) then (yes)
+    :Parse and store response;
+  else (no)
+    :Search for matching outbound email;
+    if (Match found?) then (yes)
+      :Link responses;
+    else (no)
+      :Reply to agent with instructions;
+      :Forward to user for manual review;
+    endif
+  endif
+  
+else (no)
+  :Proceed to balancing;
+endif
+
+:Balance Report and Remittance;
+note right
+  Balancing Process:
+  - Compare Report vs Remittance
+  - Validate against CertMaster
+  - Financial reconciliation
+end note
+
+if (Balanced?) then (yes)
+  :Complete Report Processing;
+  :Generate final documentation;
+else (no)
+  :Adjust balances;
+  :Create adjustment records;
+endif
+
+:Log All Certificate Changes;
+note right
+  Audit Logging:
+  - Every change tracked
+  - Reason required
+  - User and timestamp
+  - Old/New values
+end note
+
+:Generate Communication Summary;
+:Display on Agent Report Tab;
+
+:Clean up DMZ Data;
+note right
+  After report completion:
+  - Delete DMZ certificate records
+  - Delete agent report records
+  - Maintain audit trail
+end note
+
+stop
+
+@enduml

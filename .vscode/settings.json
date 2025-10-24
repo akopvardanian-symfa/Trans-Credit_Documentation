@@ -1,0 +1,23 @@
+{
+    "plantuml.server": "http://localhost:8080",
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.serverFallback": "http://www.plantuml.com/plantuml",
+    "plantuml.previewAutoUpdate": true,
+    "plantuml.exportOutDir": "out",
+    "plantuml.exportFormat": "png",
+    "plantuml.exportSubFolder": false,
+    "plantuml.exportMapFile": false,
+    "plantuml.exportConcurrency": 1,
+    "plantuml.exportConcurrencyTimeout": 30000,
+    "plantuml.exportConcurrencyTimeoutFormat": "png",
+    "plantuml.exportConcurrencyTimeoutFormatOptions": {
+        "png": {
+            "dpi": 300
+        }
+    },
+    "plantuml.java": "/opt/homebrew/bin/java",
+    "plantuml.jar": "/opt/homebrew/bin/plantuml",
+    "plantuml.include": [
+        "Process Diagrams/**/*.puml"
+    ]
+}
