@@ -5,6 +5,13 @@ TransCredit is a comprehensive insurance certificate management system that proc
 
 ## 📁 Documentation Structure
 
+### 📚 Project Documentation
+- **[TransCredit - Complete Documentation.md](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md)** - Complete project documentation with table of contents
+  - **Business Context** - Industry background and business model
+  - **Business Processes** - Current workflow and error correction process
+  - **System Analysis (As Is)** - Current technology stack and limitations
+  - **To Be (Desired State)** - Target system with pain points analysis and improvements
+
 ### 🗂️ Process Diagrams
 - **[As Is](./Process%20Diagrams/As%20Is/)** - Current system workflows and processes
   - `TransCredit - As Is.puml` - Current certificate processing workflow
@@ -14,9 +21,6 @@ TransCredit is a comprehensive insurance certificate management system that proc
   - `TransCredit - Architecture - To Be.puml` - Target system architecture
   - `TransCredit - To Be.svg` - Visual representation of target process
   - `TransCredit - Architecture - To Be.svg` - Visual representation of target architecture
-
-### 📚 Project Documentation
-- **[TransCredit - Complete Documentation.md](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md)** - Complete project documentation with table of contents
 
 ### 📄 Source Materials
 - **Meeting Transcripts** - Detailed business process discussions
@@ -41,23 +45,28 @@ TransCredit operates within the **credit insurance industry**, managing **credit
 
 ## 🚀 Quick Start
 1. **Start with**: [Complete Documentation](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md) for comprehensive project overview
-2. **Examine**: [Process Diagrams/As Is](./Process%20Diagrams/As%20Is/) for current system
-3. **Explore**: [Process Diagrams/To Be](./Process%20Diagrams/To%20Be/) for target architecture
-4. **Review**: Source Materials for detailed business process discussions
+2. **Review**: [Business Context & Processes](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md#business-context) for understanding the business
+3. **Analyze**: [System Analysis (As Is)](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md#system-analysis-as-is) for current state
+4. **Explore**: [To Be (Desired State)](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md#to-be-desired-state) for target vision
+5. **Examine**: [Process Diagrams](./Process%20Diagrams/) for visual representations
+6. **Review**: [Source Materials](./Source%20Materials/) for detailed business process discussions
 
 ## 📊 Business Impact
 
-### Current Challenges
+### Current Challenges (As Is)
 - **Manual Processes**: 95% of operational time spent on manual error correction
 - **Technology Limitations**: Outdated MS Access system with performance issues
 - **Limited Automation**: No automated error correction or state rule application
 - **Communication Gaps**: No integrated tracking of agent communications
+- **System Limitations**: Cannot handle non-monthly payments, birthday coverage, state regulations
 
-### Expected Benefits
+### Expected Benefits (To Be)
 - **Operational Efficiency**: Reduce manual correction time from 95% to <20%
 - **Financial Accuracy**: Eliminate calculation errors affecting premium amounts
 - **Compliance**: Ensure state regulation adherence and audit trail completeness
 - **Agent Satisfaction**: Improve communication and reduce billing disputes
+- **Technology Modernization**: Web-based platform with enhanced capabilities
+- **Agent Self-Service**: DMZ portal for independent error correction
 
 ## 📞 Key Stakeholders
 - **Ammon**: Project Sponsor, driving modernization effort
