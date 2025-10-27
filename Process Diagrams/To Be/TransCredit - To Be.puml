@@ -16,16 +16,46 @@ note right
 end note
 
 :Input Certificate Data;
-:Run Enhanced Error Checking;
+:Check Health Questions Status;
 note right
-  Integrated Error Checks:
-  - All Access/SQL validations
-  - Certificate validation
-  - Agent limit verification
+  AUTOMATED: System checks Health Questions:
+  - UwCode 1 = Health Questions answered
+  - UwCode 3 = Health Questions NOT answered
+  - DISABILITY: Requires ALL HQs answered
+  - Flags certificates requiring agent follow-up
+end note
+
+:Run Snapshot Validation;
+note right
+  AUTOMATED: System validates all certificates for:
+  - Customer age limits validation
+  - Premium calculation accuracy
+  - Coverage amount verification
+  - Refund method (pro-rata vs Rule 78)
+  - Platform provider errors
+  - Printing errors detection
+  - Multiple policy violations
+end note
+
+:Run Over Limits Check;
+note right
+  AUTOMATED: System checks coverage limits:
+  - Uses cumulative coverage tracking
+  - Checks if customer exceeds agent limits
+  - Validates against agent's maximum coverage
+  - Identifies multiple active policies
 end note
 
 if (Errors found?) then (yes)
   :Create CertError records;
+  note right
+    AUTOMATED: System creates error records:
+    - Certificate validation errors
+    - Health questions missing
+    - Coverage limit violations
+    - Premium calculation errors
+  end note
+  
   :Generate Agent Communication;
   
   :Send Email to Agent;
@@ -82,7 +112,44 @@ if (Errors found?) then (yes)
   endif
   
 else (no)
-  :Proceed to balancing;
+  :No Validation Errors Found;
+endif
+
+if (Coverage limits exceeded?) then (yes)
+  :AUTOMATED: System flags for review;
+  :Contact Agent for Verification;
+  note right
+    AUTOMATED: System contacts agent:
+    - Multiple policies detected
+    - Coverage limits exceeded
+    - Verification required for old policies
+  end note
+  
+  if (Multiple policies active?) then (yes)
+    :Reduce New Policy Coverage;
+    note right
+      AUTOMATED: System calculates:
+      - Maximum allowed coverage
+      - Based on agent's limits
+      - Reduces new policy coverage
+    end note
+    
+    :Notify Customer of Reduction;
+    note right
+      AUTOMATED: System generates:
+      - Legal notification letter
+      - Benefit reduction explanation
+      - Premium adjustment notice
+    end note
+  else (no)
+    :Agent can have this new policy;
+    note right
+      System allows new policy,
+      agent will cancel old if needed
+    end note
+  endif
+else (no)
+  :Within Coverage Limits;
 endif
 
 :Balance Report and Remittance;
