@@ -1,0 +1,151 @@
+TransCredit - Technical Specification for Certificates
+=====================================================
+
+Document Type: Technical Specification
+Subject: TransCredit Certificates
+Original Format: Microsoft Word (.docx)
+Last Updated: October 28, 2025 (Meeting Transcript Analysis)
+
+UPDATE LOG
+==========
+2025-10-28: Updated based on meeting transcript analysis
+- Added missing technical details from stakeholder discussions
+- Clarified business processes and validation requirements
+- Added new features and workflow requirements
+- Updated integration specifications
+
+OVERVIEW
+========
+This document contains the technical specification for TransCredit certificates processing system. This specification outlines the requirements, data structures, validation rules, and integration requirements for the certificate management system.
+
+CONTEXT
+=======
+Based on the project documentation and meeting transcripts, this specification covers:
+
+1. Certificate Data Structures
+   - Field definitions and requirements
+   - Data validation rules
+   - Format specifications
+
+2. Business Rules
+   - Agent limits and restrictions
+   - State-specific regulations
+   - Health question requirements
+   - Coverage amount validations
+
+3. Integration Requirements
+   - OCR system integration
+   - PERS system compatibility
+   - LOS (Loan Origination System) interfaces
+   - FISPAT system integration
+
+4. Validation Framework
+   - Real-time validation rules
+   - Error detection and reporting
+   - Data quality requirements
+
+5. Form Management
+   - 400+ form types across different states
+   - State approval requirements
+   - Form versioning and updates
+
+TECHNICAL REQUIREMENTS
+=====================
+- Certificate ID (CertID) management
+- Social Security Number (last 4 digits) validation
+- Name matching with wildcard support
+- Birthday validation
+- Coverage amount calculations
+- Premium calculations
+- Commission handling
+- Remittance processing
+
+BUSINESS PROCESSES
+==================
+- Monthly report processing
+- Certificate data entry
+- Health question status checking
+- Underwriting code assignment
+- Snapshot validation (to be automated)
+- Error collection and management
+- Agent communication workflows
+- Balance report generation
+
+NEW FEATURES FROM MEETING (2025-10-28)
+======================================
+1. DMZ Portal (Phase 2)
+   - Agent self-service portal for corrections
+   - Secure website with authorization service
+   - Certificate editing capabilities
+   - Self-service workflow without internal involvement
+   - NOTE: Moved to Phase 2 due to complexity
+
+2. Customer-Level Workflow
+   - Group agents under customer records
+   - Queue multiple agent emails to single customer
+   - Customer-level email composition
+   - Batch processing for multi-agent customers
+
+3. Report Status Tracking
+   - Status management for agent reports
+   - User assignment system
+   - Workflow notifications
+   - Progress tracking through process stages
+
+4. Exception Handling
+   - Certificates without remittance reports
+   - Extra certificates not listed in reports
+   - Exception tracking and billing
+   - Premium balance management
+
+ENHANCED TECHNICAL REQUIREMENTS
+===============================
+- Real-time validation (no more snapshots)
+- Permanent error records with clearing flags
+- Email integration with pop-out windows
+- Certificate counting and validation
+- Report balancing and reconciliation
+- Commission and premium calculations
+- Exception tracking and management
+
+FORM MANAGEMENT DETAILS
+========================
+- 400+ form types across different states
+- State approval process (month-long)
+- Form versioning (e.g., SPGHIA 313)
+- Cost implications for form changes
+- Agent-specific form requirements
+- High-volume agent prioritization
+
+OCR SYSTEM SPECIFICATIONS
+=========================
+- AI-augmented OCR implementation
+- High accuracy (1 error in 200+ scans)
+- Document viewing interface
+- Data extraction and validation
+- Manual verification workflow
+- Bad data handling from agents
+
+IMPLEMENTATION STATUS
+====================
+Phase 1 (Current Focus):
+- OCR system implementation
+- Real-time validation system
+- Error management interface
+- Email communication system
+- Report status tracking
+
+Phase 2 (Future):
+- DMZ portal for agent self-service
+- Advanced customer-level workflows
+- Enhanced automation features
+
+DOCUMENT STATUS
+===============
+This document has been updated based on the meeting transcript from October 28, 2025.
+It now includes current requirements and planned features discussed with stakeholders.
+
+For complete technical implementation details, refer to:
+- Original Word document (.docx)
+- Meeting transcript (TransCredit-Meeting-Transcript-2025_10_28.txt)
+- Prototype interface documentation

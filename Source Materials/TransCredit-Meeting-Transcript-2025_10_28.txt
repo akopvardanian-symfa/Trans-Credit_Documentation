@@ -1,0 +1,445 @@
+[Akop]
+To start, we actually provide some pros I'd like you to see. Okay, what are we going to do now? I suggest to go from up to down through the whole process, step by step, and understand everything is clear in the process we understand.
+
+First of all, you're, please, going to correct us, and also, at the same time, I'm going to suggest you some, let's say, thoughts from our side, how we see we can automate, on the first steps of our collaboration, the whole process steps. So, let's start with the very beginning, when you receive some agent report. So, now, we receive monthly report from bank via email.
+
+It can be open Excel file, manually review what's in there. So, for the 2B process, we suggest the report come directly into the new web system, and we ultimately can save it to database, no need to manually open files and work with that file, because as far as I can see, actually, I saw the screen recording from meeting with, I believe that was Tonya, you, with my colleague Ivan, you showed him how it works at the moment, and there are a lot of manual work.
+
+So, it's the first little step we can automate, for sure. Then, the second step, as I got, in assist process, we manually assign report number, like August BOSS or August ER to track where report came from.
+
+[Speaker 3]
+Is that true?
+
+[Akop]
+We manually do this, right? And, actually, we can do it automatically. We can assign number when saving, no manual entry needed.
+
+Please interrupt me if I'm going wrong.
+
+[Speaker 5]
+Okay.
+
+[Akop]
+Okay. So, here, these two, the first beginning of the process, we can automate, for sure, with just simplify logic in the system. So, then, for enhanced certificate search, we can just modify some database search, like we can search by name with a wild card, birthday, social number, claim number, much faster to find what you need.
+
+So, because now, in assist process, you only can put number, the last four digits of social number, if there is no certificate. So, this is the only way you're searching for certificate in your system, right?
+
+[Speaker 4]
+Yes. We do have another option called CertID. Currently, when we input a certificate, it is, in the background, assigned a CertID.
+
+That's just an internal thing, but, yes, we do have that option, as well. I don't know if that's going to be carried over into the new system or not. We're keeping CertID.
+
+That's our, like you said, internal identifier.
+
+[Speaker 2]
+Yes, we have to have that.
+
+[Akop]
+Okay. Thank you for clarifying that. I see.
+
+I make some notes. Actually, thank you very much. So, the next step is when we input certificate data.
+
+So, now we enter all certificate data into Microsoft Access. Pretty slow process, I believe, and it took a lot of energy from you. So, to be processed, of course, you can enter that into the modern web system here.
+
+The better interface, like fewer errors, faster data entry, of course. So, one of the next steps of the whole process is check health question status. So, personally, manually reviews and sets UW code.
+
+I believe this is underwriter code.
+
+[Speaker 5]
+Underwriting. Yes, yes.
+
+[Akop]
+Underwriting code. Okay. One or three, depending on whether a customer has answered health questions.
+
+So, we can actually automate this still. So, system automatically checks health questions, status for each plan, sets codes automatically, flash problem certificates without human intervention, let's say. Okay.
+
+[Speaker 4]
+We have one more code, underwrite code two. That is if they've answered yes to a question that should be no or no to a question that should be yes.
+
+[Akop]
+Okay. So, such deep details, I believe, we can clarify later when we go to the next step, and more precisely, we'll look at the details. Okay.
+
+Okay, yeah. Thank you very much. It's really good information for me.
+
+So, then, you ran snapshot validation. I saw it with my eyes. On the video.
+
+So, here, the user must manually click or run snapshot button, wait for system to validate, then review errors, right? Yeah, of course, we can. I believe you will be agreed with that the system automatically should do this, do all of these validations.
+
+So, there were customer age limits, as far as I remember, premium, calculation accuracy, okay, yeah, coverage amount, response methods, et cetera. Okay. Move on.
+
+So, then, we run all the links. Okay. Must manually click run all this button.
+
+System shows limit violations, but must manually launch text. So, actually, why we do all of this step manually, because maybe it's limitation of the system, but I believe we can automate this as well. Good.
+
+That's good. Okay. So, the next step, if we find some errors, the consumer goes to creating the search errors records, right?
+
+So, we manually collect all these errors in the list and manually fix it, and at the same time, we're sending everything to the agent, right? So, I believe we can collect all of these errors automatically without manual work. Only on the validation step, I believe we need some validation from the user site before we send emails to agent, for example.
+
+Just not to do it without our control, you know? Okay. So, of course, we need to generate agent communication and send email.
+
+So, we can prepare all these emails with record IDs, ready-made spreadsheet with certificates to fix, DMZ website link, everything ready for sending automatically here. Okay. So, now agent receives email.
+
+If we move a little down. Okay. Now, agent receives email, then must reply to us with corrections.
+
+We manually enter change back into system. So, for to be processed or desired state, we suggest data automatically copied to DMZ database. DMZ is a system we suggest to create for that.
+
+Okay. So, agent logs into secure website via some authorization service, see their report, edit certificates right on the website, submit, and complete self-service without our involvement. So, I believe this approach will be the best one for the both sides.
+
+So, we will have the one system with the interface that we can collect all the changes and track all the changes through the whole process and log the steps to understand the status of each step of the whole process.
+
+[Speaker 4]
+So, you're going to have the agent make the corrections?
+
+[Speaker 2]
+Yeah, that was my question as well.
+
+[Speaker 4]
+Okay. The only problem that I can see with that is when the customer is given a certificate, which is a legal document, and changes are made to life, disability, or AD&D, we as an insurance company have to legally notify the customer if any changes were made that do not match that certificate. So, if we're having the agent make the corrections, I don't know how we're going to track.
+
+[Speaker 2]
+Yes, a new copy of that certificate has to be sent to the owner.
+
+[Speaker 4]
+Or a letter stating what changes happened and the customer has to sign it saying they are aware of those changes.
+
+[Speaker 2]
+Hey, ACOP, and then I'll let you go here, Ammon. I'm trying to upload to you some documentation we've already done because we've sat with Tanya and her team downstairs and I've already kind of done some data diagramming. You have some extra stuff on here that I didn't have initially, but just to give you some diagramming that might help you as well.
+
+I was wondering, is there any way I can upload them to you? I was trying to send them to you in the Teams chat. I have the as-is process documented.
+
+Also, a kind of a draft of what the end result should look like. And part of that's using some programming that Ammon already got in place because we're writing up documentation as far as the step that you have previously where we're going to automate the importing of the data from the certificates using AI augmented OCR. That process, we've kind of already laid that out and what that would look like.
+
+And then also, when we get into the weeds on some of this error checking stuff, I won't go over all the details right now, but there is a whole slew of errors. And I'm not positive that everything can be automated because of the nature of some of the errors. And you'll see what we're talking about if we get into some specific examples, but I'll spare you that for right now.
+
+All right. So yeah, if there's a way I could send you some of these diagrams that give you some extra context, that'd be probably good. And then Ammon, I'll let you go ahead.
+
+[Speaker 3]
+As we're talking more with Tanya, this portion down there about going to the DMZ and having the agents themselves make those changes, we could still potentially do that. But we would require them to at the same time when they're making those changes to upload a copy of that certificate if we didn't already have it. But because of that, I'm wondering if that portion, if we should go ahead and kind of move that to almost like a transcredit phase two, because that's a feature we don't currently have.
+
+And I think it's a feature that we're going to need to spend a little bit more time talking about, because especially with some of our larger customers and how we send information back and forth, they're not going to be able to go in and make these changes. On the DMZ website, they would simply send us the files directly, and then we would make, our agents downstairs would make those changes. So I think for now, let's go ahead and take that DMZ portion and put that on the back burner so we can focus on getting everything else that needs to get implemented, implemented to get off of access.
+
+And then once that's done, we can come back and start addressing the DMZ solutions to even streamline things even further. Because as I said, the agents are going to need, sorry, not agents, our users, they're going to need a way to go in and make these corrections and do all that, regardless of if we have the DMZ website or not.
+
+[Akop]
+Yeah, I see. So this is just in case. Well, we just wanted to confirm whether we understand the current process correctly.
+
+So the rest of things that we suggest, this is just a suggestion to be discussed, of course, with you. Thank you.
+
+[Akop]
+Okay, so, um, okay, there was any other questions or we can just move forward to the end of the process.
+
+[Speaker 4]
+I don't have any questions.
+
+[Akop]
+Okay. Okay, thank you very much. That was very useful.
+
+Okay, so we know that we have some process that agents should correct and validate. They make corrections and validate. Now agent emails us with corrections.
+
+We manually enter them into the system, then check balances. Is that correct? Yeah.
+
+Agents send emails us, right? So, yeah, with corrections that we check it again and put it in the system manually. Okay, so, and for, um, and just to, um, and as far as I understand, this part we don't want to automate as well, right?
+
+I'm just trying to understand what is the plan of this manual steps that we can actually automate it. So, Kyle, you said that you are planning to use OCR technologies for that, right? To read the documents and pass them into the system.
+
+Am I correct?
+
+[Speaker 2]
+Yeah, so one of the things we're working on right now is identifying which of our customers to start with. And so there's some stuff that one of the other developers is working on as far as that. And Tanya's team is inputting form numbers for us.
+
+So I think by next month we should have a good idea of which forms we could move forward with with AI augmented OCR. And so the plan is we're going to get some PDF certificates or whatever. And instead of Tanya's team manually typing in, I think the first phase would be we're going to run these through the AI augmented OCR.
+
+And then Ammon's kind of got a web interface already laid out and designed where it's going to pull up a picture of that certificate after they've been scanned. And his site can do some basic validation. And then it'll pop up and have one of Tanya's staff, instead of hand typing all that in, they're going to have to look at the data that's come in and what the OCR extracted and then compare it to what's on the PDF or the paper copy that was scanned in and verify that the OCR actually pulled in everything.
+
+And one of the biggest problems we have is, and we've done some testing with this OCR system, and it's very, very accurate. We only found one mistake it made out of 200 and something certificate scans. However, the biggest problem we ran into is that the certificates that we're getting from our agents have really bad data on them.
+
+Like there's fields that are completely missing, they failed to fill things out, they didn't write values in in the right spot, or just biggest thing is just missing information. And so, somebody's going to have to, at that step, we don't even have good data to even move forward with to do some additional validation like what you're referring to down here in the process to do some balancing or to send corrections back to the agent. I mean, we don't even have enough information sometimes to generate the certificate electronically to begin with.
+
+So, somebody's going to have to be involved at that step to even get some more data back from the agent. Or, the other option we've discussed is to push that back at the agent and get them to give us more data back. So, were you able to get those diagrams that I sent over to you?
+
+[Akop]
+I'm not sure at the moment, but let me see. Yeah, I see them. You want me?
+
+I can open it.
+
+[Speaker 2]
+Okay, let me see. Which one is that one? I think that is the as-is process.
+
+I kind of broke them out into swim lanes for right now. And these are fairly basic. Okay, this is the current process for manual entry.
+
+And right now, basically, the only part we're looking to really automate in phase one would be the resistance measurement.
+
+[Akop]
+Yeah, but it looks actually pretty straight without any options on each step. But at the same time, I can see that all steps we included actually in the diagram we have here. Yes.
+
+[Speaker 2]
+I'm just giving that to you for context.
+
+[Akop]
+Yeah, thank you. I'm going to look at it more precisely.
+
+[Speaker 2]
+There's one that has the AI augmented HDR workflow laid out.
+
+[Akop]
+Okay, thank you. I see. So now we have our agent corrections.
+
+So we got inbound email. So we're receiving email from agents searching in mailbox for old email, manually link them together, reply to agent. This is one of the steps when user reviews change after he sent email to agent and received the answer.
+
+And here is some flow. Once we get inbound email, so I call this step monitor inbound email. So in past response.
+
+So we receive email from agents searching mailbox for old emails, manually link them together, and then reply to agent. So it's one of the steps. Am I correct here?
+
+How is it happening now?
+
+[Speaker 4]
+I think so.
+
+[Akop]
+Okay. So then we, again, run over limits check. This is like an additional process here.
+
+If limits exceeded, as I got it from your presentation, we manually call agent, ask about all policies, manually calculate maximum coverage. This is what happening, right?
+
+[Speaker 4]
+Yeah, we email or we call. Yes. Because if an agent, if a customer has multiple policies causing them to be over, sometimes the agent just forgot to send in a cancellation.
+
+So that's why we check with them to make sure, hey, are all of these policies active? Because that's when they catch that they forgot to cancel something.
+
+[Akop]
+Okay. Okay, I see. Am I understand correct that you limited agents to sell policies, you know, you give them some limitation about the policies coverage, right?
+
+[Speaker 5]
+Yes.
+
+[Akop]
+So you can sell, for example, $100,000 coverage.
+
+[Speaker 4]
+There's also a limit requiring health questions. So some of the agents, if they sell $450 in disability coverage, they have to answer health questions. So every policy, if their maximum agent limit is 1,000, but they sell multiple policies, every policy they sell after they hit that 450, they have to send in health questions.
+
+So we also catch then, hey, this customer has three active policies. They're still under your maximum limit, but we need health questions. So that also happens here.
+
+[Akop]
+So in bad cases, we are canceling policies that he already sold, right?
+
+[Speaker 4]
+Or reducing. Sometimes we just reduce the premium and the benefit to the maximum amount allowed.
+
+[Akop]
+Okay. Okay. Yeah.
+
+So I got it correct. Okay. Thank you.
+
+So then we get back to our systems and doing some balance report and permittance, right, here.
+
+[Speaker 4]
+Yeah. We really balance at the very beginning. Here, we would just make sure that the check amount due or the amount due from the agent matches what is in the system after we've made all of our corrections.
+
+[Akop]
+So, and you're not planning that the system will automatically compare reports versus remittance and validate against those masters here? So we're going to do it manually too, right?
+
+[Speaker 4]
+Yeah. Yes.
+
+[Akop]
+Okay.
+
+[Speaker 2]
+Also, some of the agents don't even send us remittance reports, so we don't even have anything to balance against. Some of them just send us data, and whatever it is is whatever it is. We have no way to know whether it's correct or not.
+
+[Speaker 4]
+Well, and they don't always – sometimes they handwrite their own report remittance, so they don't fill in a net total. They don't subtract commission. So, yeah, there's a lot of missing pieces with that as well.
+
+[Akop]
+Okay. Yeah, I see. I see.
+
+Thank you. Thank you for that clarification.
+
+[Speaker 5]
+Okay.
+
+[Akop]
+So, and this is the end of the processes. When we manually remember what was changed, if needed, all the trail, difficult to reconstruct who changed what. So I heard that this is one of the pain points of the processes.
+
+And so one of the last steps is when we generate communication summary and review communication history with agent in emails. And here we can also might lose something. Pretty difficult and took a lot of efforts.
+
+From us to manage all of this flow. And at the very end, after report completion, data remains everywhere. We need to clean up this.
+
+And we do it now manually. So from our perspective, we can show some things, some steps that we can automate it. But as far as I can see, we have another plan, of course.
+
+And it's very good that you shared with us all of your plans. Thank you for the additional documentation. I'm going to take a look more detailed and perhaps we will have other questions.
+
+Maybe do you have some other inputs you would like to share with us? And that will help us to prepare some of our suggestions for the future.
+
+[Speaker 2]
+Yeah, go ahead. I'll let you go first.
+
+[Speaker 3]
+I have quite a few items. If you want me to go ahead and start sharing, if that's okay. We've been discussing a lot about a different things and working through and have some mock ups of how we're kind of looking at things to work.
+
+For starters, I want to show you real quick. So this is the page that Kyle was talking about when the OCR when it brings in, they can view the actual document that brought into the system. And then the parsed data will come across here.
+
+And so they can go through and input it and change it and make whatever corrections are needed. And they can work through all the files as they come across through the OCR when we get actual either paper documents via mail or if they send us the PDF or whatever. They don't send us a data file.
+
+The data files, those are all handled right now by FISPAT. Is that correct, Kyle? I believe.
+
+All the electronic ones, yes. Yeah. So however the files come and get to us, they eventually get into the agent report.
+
+And this is a new page. We're kind of starting adding some things to it, just haven't completed it yet. So there are a few changes we're making on here, but we don't need to get into the weeds with that.
+
+So I won't go into that. But we already have pages, so if they come in and they add a new certificate, then it takes them to the page where we have a bunch of the validation pieces already built into this. So it makes sure it checks to make sure it's within policy range.
+
+If the owners are part of the borrower in the right age group, they're old enough, the maturity data isn't too far in the future, a bunch of error checks are already inside here. But it will still let them add the certificate, even with bad data, because the agent may have given them bad data, so they need to follow up with that. Yeah, what was your question?
+
+[Akop]
+Yeah. Now you show us the interface that agency, right?
+
+[Speaker 1]
+This is the interface for our users, not the outside users.
+
+[Akop]
+Okay, okay, this is interface for users. And I'm interested about the thing that how agents prepare the certificate that they will sell. So, do they do this all manually?
+
+Or, because I see that, you know, they don't have any validations when they selling this certificate, this policy. And that is one of the big causes why we have a lot of misunderstood, misunderstanding with the agencies, right? So, a lot of things that are not matched with the reality.
+
+So, then we, on our users' side, we have to fix it manually.
+
+[Speaker 1]
+Yeah, so this PDF document here, yeah, they will put bad data inside there. And we don't have any way of correcting that or changing that. We can't put this on a web interface.
+
+We can't force them to do that. It is going to be a document that they fill out. Most, a lot of them are filled out by hand.
+
+And we don't have any control over that. Okay.
+
+[Speaker 2]
+And some of them… So, our agents, they use what's called a loan origination system. And that's where they go to put, you know, to sell a loan to their customer.
+
+And so, every single one of our agents uses different LOSs from different companies. And they all have different capabilities and different things and different ways they spit data out. So, that's one of the problems, like Ammon's saying.
+
+They all do it differently. There's no, like, uniform, hey, this is how the data comes in. Like, you're seeing one example.
+
+This form, I mean, there's hundreds of them, different types of forms that look like this based on what the agents are using and the state that they're in.
+
+[Akop]
+Who gave them this type of form?
+
+[Speaker 2]
+We have to. We have to file. So, part of our regulation is this form has to get approved by the state that they are in.
+
+So, like Tennessee. Tennessee has to approve this form if it's for a Tennessee, if the agent lives in Tennessee. If their home base is in North Carolina, then we have to generate one of these.
+
+Yeah, see down at the bottom, that left corner? See how it says SPGHIA 313? That is the unique identifier to tell us which version of this form it is and which form it is exactly and what's on it.
+
+But there's not even just one form per state, right? No. There's not even just one form per state because what happened is, you know, as the business grew, they started doing business with an agent over in North Carolina, say.
+
+And so, we made a form up for their needs. Well, then, you know, two years down the road, we sign a new agent. Well, their form needs are different because they're selling different products now.
+
+So, we had to come up with a new form for them. And every time we change one of these forms, I mean, it's a month's long process to get them approved by the state. And also, it's cost.
+
+There's money associated. Like, if we were to try to uniformize all these forms into, like, just a couple, it would be astronomically expensive.
+
+[Speaker 5]
+That was going to be my next question. Okay.
+
+[Speaker 1]
+Yeah, and we have – there's over 400 forms that we currently use across the system. So, of course.
+
+[Speaker 2]
+That's why we're trying to identify the most used ones. So, the thought was we could go to our most high-volume agents first. But even if it's a high-volume agent, we might have, you know, 60 agents in a particular state that are all using the same form.
+
+And so, cumulatively, together, they all are making a higher volume of business than a single high-volume agent in a different state.
+
+[Akop]
+Yes. Go ahead, Eika. Yeah, I see the reason why you're going to use OCR for that.
+
+And at least trying to help the agents to fill in all of this blank on the agent side, right? And I'm sure you've already thought about this, but, you know, we just came up with the thought that what if there were a form with business rules, a web form with business rules? So, let's say for each state, that's going to restrict something.
+
+[Speaker 2]
+Yes, that is excellent. We do already have that. That is called our PERS system.
+
+And our agents can actually log into that, and they can actually fill out the certificate. And we do have exactly what you're saying, the limits and different things baked in for their state. However, we've just never been able to get the agents to use that form.
+
+Their system is – all right, let me put it in this. They go into their LOS system, and they enter all their user's information into that system. And so now they've typed out and hand-entered all that information.
+
+Now, if they were to go use our web form, they're going to have to go over there and hand-type all that information in a second time. And so that's a lot of headache for them. Ideally, it would be great if we could API interface with their LOS and extract that data out.
+
+And that's something we've tried to explore in the past, but it's extremely cost prohibitive. If we had a large volume agent, that'd be something we could look at doing and work with that vendor of that LOS system. But ideally, yes, we would love it if our agents would just go out into our PERS system and enter the certificate information.
+
+But then it's double data entry on their part, and they're just not willing to do that. So they just print out these certificates from their core system or their LOS system, and then they just send them to us. Or they're, like Tanya said, they're handwriting these.
+
+[Akop]
+I was sure that you definitely thought about that. I just was interested about the reason why you don't go that way. Yeah, now I understand.
+
+Okay, thank you very much.
+
+[Speaker 1]
+So, yes, when they get the certificate inside here, if there are errors, it shows them, but it still lets them save the certificate because they save it based on what was sent to us. So if it was filled in incorrectly, then there'll be an error on there. So now going on to the new mock-up stuff we have, and here's just the quick view, all the summary for all the input that was brought inside here.
+
+So any certificate, when it is input with an error, and these next couple pages, these are just purely mock-ups. These are not valid data. They don't show valid things.
+
+They're just what we want it to look like. So when a certificate is input that has errors on it, all of those errors, each individual error for each certificate would pop up here, and this is where the user would see it. So we're no longer going to be doing anything with snapshots.
+
+Everything is going to be done in real time, nothing to report, nothing anything like that. So as soon as they, when they input that certificate, if there's an error, it's going to insert, as you have in your diagram, into that certain error table, and those records will be permanent. But once an error has been cleared, it'll be flagged as being cleared, so it will no longer show on this unless they wanted to find out all the errors.
+
+And if they need to or something, if they wanted to, they could maybe add a note to it for this specific something. But if it's not a certificate and they got information back from the agent, then they would go into that certificate. They would make that change, save it.
+
+This isn't the edit page. We haven't done the edit page yet. But they would save that change.
+
+And then if that corrected that error, then it would clear that out. So when they come back to the report, that would no longer be here. And they would go down and simply work down the report, clearing out all the errors one by one as they could.
+
+And then with the communications, yeah, this is what we're talking about. So when they need to send an email so they can say, hey, you know, there was a problem. My dark mode has switched back.
+
+So when they need to contact an agent about a report, there's issues on there, then they would send their emails from here and they can put additional contacts or whatever. By default, this puts in the report number. Again, they can put information about it.
+
+They'll have an option here to include a list of those errors. And I was talking to Tanya this morning. We want to include some additional information in here as well, some options on what can be filled, or showed, or whatever.
+
+And then when they're done, they send that off to the agent. And then when the agent responds back, that email will come back inside here with those corrections and whatever they need to do. And I'm sharing just my window.
+
+They can pop out this email if they can have it in a separate window while they go back to that error that they were working on and go inside here and make whatever changes they were doing. And then, yeah, that'll clear that. And it can just kind of loop through the whole process, going through the errors and picking them all and correcting them all one by one based on that communication.
+
+And one thing that no one had talked about because Tanya and I just discussed it on Friday and kind of finalized it on Monday is there are some customers who they may have 10-plus agents, but they're all done under one customer record. So when they go to send an email to that one regarding a report, instead of sending that email directly at that time to that one agent, we're going to need an option to queue that report for the customer level. So a customer is basically a group of agents so that they'd be able to queue all of that they could have.
+
+So that one customer could have 10 agents, and every agent has a separate report it has an issue with, so they could queue up 10 emails to this one customer for all those different agents. And then we would need a customer-level screen where they would go to to then send out that email at the customer level, which would just take all those 10 separate agent emails and just combine them all into one email to go out to that customer. And then when the customer replies to that, once again, it would be just like this, but coming at the customer level, and the agent would need to go down, and our user, sorry, would need to go down in each agent to correct all those certificate errors.
+
+[Akop]
+Yeah, I see. Well, pretty beautiful interface, much better than I saw on Tonya's presentation.
+
+[Speaker 1]
+Yeah, yeah. And one other thing too, got to mention too, we also need a way to set, and this was something that once again just came up today, but we'll need a way to have a status for the agent reports, as well as an assigned user, because that way, as they go from entering things, they can then, once they're done entering stuff, they'll advance on the corrections and so forth, so we can notify the different users at different times who the next person is who needs to start doing something, work with it, and then a way for that user to log in and view the list of reports that are assigned to them that they need to do something. And one last thing I was going to mention, so you did talk about totaling up, so this value right here, the search premium, this is the calculated value of all the certificates that are on this one report, and this is what the user thought should be put on there, of course, and there's the commission, and then these are any payments that are made on that report. So all of these different things will need to eventually match up for this report to be finalized and complete.
+
+[Akop]
+Okay, I know that we are out of time, but I would like to ask my colleague Alexander, do you have any questions, Oleg?
+
+[Speaker 6]
+Not for right now, we'll talk with you after this call, and maybe I will clarify some things for myself, and then if it's possible, we'll send our clarification questions after the meeting.
+
+[Akop]
+Okay, I have one little question, and this is all, so I'm just wondering how do you know how many certificates were sold only from the agent's report?
+
+[Speaker 1]
+So they get sent to us, and correct me if I'm wrong, Tanya, but they get sent to us as a batch, as a group, and so the report is that one group, whatever gets sent together in a group.
+
+[Speaker 4]
+Yes, and the report room, it has an option to list how many certificates they're sending, which helps us to know that we did receive all of them, but our system also counts them.
+
+[Akop]
+So it's not possible to sell more and show you less?
+
+[Speaker 4]
+If they sold more and didn't send everything, yes, that is possible, but that's when we balance the report before we start making any corrections, and if it doesn't match the report in minutes, we start looking to see why, and that's when we catch that we didn't receive everything, but they also will send extra certificates and not put them on the report in minutes. Those we list as exceptions because we bill off of the total that's on the report in minutes, so any certificates they forgot to include in those totals become exceptions on the report to keep the report in balance because they owe us that premium. So yes, it's possible to send too many, and it's possible to not send enough.
+
+[Akop]
+Yeah, I see, I see. Yeah, thank you very much. Thank you very much, Tonya.
+
+Nice to know this. I'm done. Thank you very much for your time.
+
+Appreciate it. Andrew?
+
+[Speaker 5]
+Yeah, thank you for your time. We'll discuss it internally, and then we'll move forward with the next portion of questions, and we'll start moving forward with our proposal, final proposal with Alex and Eiko. Thank you.
+
+Have a great day. Bye.
+
+[Speaker 4]
+Thank you. Have a good day. Thank you very much.
+
+Thanks, guys. Have a good day. Bye.
