@@ -3,14 +3,6 @@
 ## 📋 Overview
 This document contains detailed descriptions of all TransCredit prototype interfaces, demonstrating the transition from the outdated MS Access/Excel system to a modern web application with automated error processing and improved agent communication.
 
-## 🏗️ System Architecture Overview
-
-### Target Process Flow (Phase 1)
-![TransCredit Target Process](./TransCredit%20-%20To%20Be%20-%20Phase%201.svg)
-
-### Target Architecture (Phase 1)
-![TransCredit Target Architecture](./TransCredit%20-%20Architecture%20-%20To%20Be%20-%20Phase%201.svg)
-
 ---
 
 # 1. Agent Reports Overview - Detailed Interface Description
