@@ -261,17 +261,15 @@ Monthly report processing is completed.
 
 ## 🚀 To Be (Desired State)
 
-### Target System Overview
-The new TransCredit system will be a modern web-based platform that addresses all current pain points through automation, enhanced communication, and comprehensive audit capabilities.
-
 ### Key Pain Points Addressed
 
-#### 1. Manual Error Correction (95% → <20%)
+#### 1. Manual Error Correction (95% → Significant Reduction)
 **Current Problem**: Staff spend 95% of time manually correcting agent errors
-**Solution**: Automated error detection and agent self-service portal
-- **Automated Error Detection**: System automatically identifies all validation issues
-- **Agent Self-Service**: DMZ portal allows agents to fix their own errors
-- **Reduced Manual Work**: Staff focus on complex issues only
+**Solution**: Automated error detection with OCR integration
+- **Automated Error Detection**: System automatically identifies validation issues
+- **OCR Integration**: AI-augmented OCR for certificate data entry (Phase 1)
+- **Manual Verification**: Staff verify OCR results and handle complex cases
+- **Limited Automation**: Not all errors can be automated due to their nature
 
 #### 2. Limited Search Capabilities
 **Current Problem**: Basic search by certificate number, SSN, customer name
@@ -293,6 +291,7 @@ The new TransCredit system will be a modern web-based platform that addresses al
 - **Email Integration**: Automated email generation and response parsing
 - **Communication History**: Complete record of all agent interactions
 - **Status Tracking**: Clear visibility into resolution progress
+- **Manual Linking**: Staff still need to manually link related emails initially
 
 #### 5. System Limitations
 **Current Problem**: Cannot handle non-monthly payments, birthday coverage, state regulations
@@ -302,28 +301,13 @@ The new TransCredit system will be a modern web-based platform that addresses al
 - **State Regulations**: Automated application of state-specific rules
 - **Free Look Period**: Proper handling of 30-day cancellation periods
 
-### New System Architecture
-
-#### Process Diagram - Target Workflow
-![TransCredit Target Process](./TransCredit%20-%20To%20Be.svg)
-
-#### Architecture Diagram - Target System
-![TransCredit Target Architecture](./TransCredit%20-%20Architecture%20-%20To%20Be.svg)
-
-### Technology Stack Transformation
-
-#### Current vs Target Technology
-
-| Component | Current (As Is) | Target (To Be) |
-|-----------|-----------------|----------------|
-| **Frontend** | Excel-based interface | Blazor web application |
-| **Backend** | MS Access with VBA | C# services with SQL Server |
-| **Search** | Basic certificate/SSN search | Enhanced multi-criteria search |
-| **Communication** | Email-based, no tracking | Integrated email system with DMZ portal |
-| **Audit** | High-level logging | Comprehensive change tracking |
-| **Error Handling** | 95% manual correction | Automated detection + agent self-service |
-| **State Rules** | Manual handling | Automated application |
-| **Payment Schedules** | Monthly only | Multiple schedules supported |
+#### 6. OCR Data Quality Issues
+**Current Problem**: Poor data quality from agents (missing fields, incorrect values)
+**Solution**: OCR with manual verification workflow
+- **High OCR Accuracy**: 1 error in 200+ scans
+- **Manual Verification Required**: Staff must verify OCR results against source documents
+- **Bad Data Handling**: System flags incomplete or incorrect data for manual review
+- **Form Prioritization**: Focus on high-volume agents first
 
 ### New Business Process Flow
 
@@ -337,23 +321,30 @@ The new TransCredit system will be a modern web-based platform that addresses al
 - **Technology**: Advanced search algorithms with multiple criteria
 - **Improvement**: Faster certificate location and management
 
-#### 3. Automated Error Detection
+#### 3. OCR Data Entry (Phase 1)
+- **New Feature**: AI-augmented OCR for certificate processing
+- **Technology**: OCR system with document viewing interface
+- **Process**: 
+  - Scan PDF certificates or paper documents
+  - OCR extracts data automatically
+  - Staff verify OCR results against source documents
+  - Manual correction of OCR errors or bad agent data
+- **Limitations**: High accuracy (1 error in 200+ scans) but manual verification required
+
+#### 4. Automated Error Detection
 - **Current**: Manual "Run Snapshot" button click
 - **Target**: Automated error checking with comprehensive validation
 - **Technology**: Integrated error checking service
 - **Improvement**: Proactive error identification
+- **Note**: Not all errors can be automated due to their nature
 
-#### 4. Agent Self-Service Portal (DMZ)
-- **New Feature**: Agents can fix their own errors
-- **Technology**: DMZ website with Auth0 MFA authentication
-- **Process**: 
-  - Agent receives email with specific errors
-  - Logs into DMZ portal
-  - Views and edits certificates
-  - Submits corrections
-  - System validates changes automatically
+#### 5. Agent Self-Service Portal (DMZ) - Phase 2
+- **Deferred Feature**: Agents can fix their own errors
+- **Reason**: Large customers prefer direct file submission
+- **Technology**: DMZ website with Auth0 MFA authentication (future)
+- **Current**: Manual agent communication continues
 
-#### 5. Automated Communication
+#### 6. Automated Communication
 - **Current**: Manual email communication
 - **Target**: Structured email system with tracking
 - **Features**:
@@ -361,8 +352,9 @@ The new TransCredit system will be a modern web-based platform that addresses al
   - Response parsing and linking
   - Communication history tracking
   - Status monitoring
+- **Limitation**: Initial manual linking of related emails still required
 
-#### 6. Comprehensive Audit Logging
+#### 7. Comprehensive Audit Logging
 - **Current**: Basic logging
 - **Target**: Complete change tracking
 - **Features**:
@@ -371,57 +363,12 @@ The new TransCredit system will be a modern web-based platform that addresses al
   - Old/New value comparison
   - Compliance reporting
 
-#### 7. Enhanced Balancing
+#### 8. Enhanced Balancing
 - **Current**: Manual reconciliation
 - **Target**: Automated balancing with validation
 - **Technology**: Report balancing service
 - **Improvement**: Faster and more accurate financial reconciliation
-
-### Key Benefits
-
-#### Operational Efficiency
-- **Manual Correction Time**: Reduced from 95% to <20%
-- **Processing Speed**: Faster report processing and error resolution
-- **Agent Satisfaction**: Self-service capabilities reduce friction
-- **Staff Productivity**: Focus on complex issues, not routine corrections
-
-#### Data Accuracy
-- **Automated Validation**: Comprehensive error checking
-- **State Compliance**: Automated rule application
-- **Calculation Accuracy**: Enhanced payment schedule support
-- **Audit Trail**: Complete change tracking for compliance
-
-#### Communication
-- **Structured Emails**: Automated generation and tracking
-- **Agent Portal**: Self-service error correction
-- **Status Visibility**: Clear progress tracking
-- **Response Management**: Automated parsing and linking
-
-#### Technology Modernization
-- **Web-Based Platform**: Modern user interface
-- **Scalable Architecture**: SQL Server backend
-- **Integration Capabilities**: DMZ portal and email systems
-- **Future-Proof**: Extensible platform for growth
-
-### Implementation Impact
-
-#### For Staff
-- **Reduced Manual Work**: Focus on complex issues only
-- **Better Tools**: Modern web interface with enhanced search
-- **Clear Communication**: Structured agent communication
-- **Complete Audit**: Full change tracking and compliance
-
-#### For Agents
-- **Self-Service Portal**: Fix errors independently
-- **Clear Communication**: Structured email system
-- **Faster Resolution**: Automated error detection
-- **Better Support**: Enhanced communication tracking
-
-#### For Business
-- **Operational Efficiency**: Significant time savings
-- **Compliance**: Automated state rule application
-- **Scalability**: Modern platform for growth
-- **Audit Readiness**: Complete change tracking
+- **Note**: Manual balancing still required for agents without remittance reports
 
 ---
 
