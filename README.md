@@ -14,6 +14,10 @@ TransCredit is a comprehensive insurance certificate management system that proc
     - **Key Pain Points Addressed**
     - **New Business Process Flow**
 
+### 📑 Main Markdown Files
+- Project overview and process details → **[Project Documentation/TransCredit - Complete Documentation.md](./Project%20Documentation/TransCredit%20-%20Complete%20Documentation.md)**
+- UI mockups and interface descriptions → **[Prototype Overview/Complete-Interface-Documentation.md](./Prototype%20Overview/Complete-Interface-Documentation.md)**
+
 ### 🗂️ Process Diagrams
 - **[As Is](./Process%20Diagrams/As%20Is/)**
   - `TransCredit - As Is.svg` - Current process
@@ -60,11 +64,6 @@ TransCredit operates within the **credit insurance industry**, managing **credit
 - **Agent Satisfaction**: Improve communication and reduce billing disputes
 - **Technology Modernization**: Web-based platform with enhanced capabilities
 - **Agent Self-Service**: DMZ portal for independent error correction
-
-## 📞 Key Stakeholders
-- **Ammon**: Project Sponsor, driving modernization effort
-- **Tonya Iles**: Operations Team Lead, providing business process insights
-- **Ivan Sokolov**: Technical Lead, responsible for development and technical understanding
 
 ---
 *Last updated: October 2025*
