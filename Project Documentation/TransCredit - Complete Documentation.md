@@ -261,6 +261,36 @@ Monthly report processing is completed.
 
 ## 🚀 To Be (Desired State)
 
+### Technology Stack (MVP)
+
+Frontend:
+* Blazor (C#) - Сore frontend framework across all projects. Must align with existing portal modules and component library.
+* Razor Components / Shared UI Kit - Reuse Plateau Group’s internal component library and DMZ Bootstrap-based Blazor controls.
+* Styling Consistency – Follow existing internal web portal (PlateauGroup.Web) standards, compiled via Web Compiler SCSS.
+
+Backend:
+* C# / .NET 8 API layer - Business logic, data validation, workflow, audit, and integrations.
+* Microsoft SQL Server - Centralised relational DB for Certificates
+* Entity Framework Core - ORM for database communication.
+* Plateau Services Layer – Shared API for report and remittance processing.
+
+Deployment and Environments:
+* The main repo contains both the Internal and DMZ projects.
+* Daily commits → feature branches → review → merge to main (repo shared with Plateau team).
+* Plateau executes the final merge and deployment via the existing internal pipeline.
+* Standard four-tier model (Dev/Test/UAT/Prod).
+
+Authentication / Authorisation:
+* Azure Active Directory (SSO + MFA) – Confirmed as the primary auth provider for internal users.
+* Auth0 – Used on public DMZ site for agents; new agents flagged for “initial setup wizard.”
+* RBAC – Role-based access controlled by Active Directory groups (APS Admin, Operators, etc.).
+* No new roles required for MVP; existing groups cover all permissions.
+
+Integrations:
+* DocMgmt & OCR - Existing document ingestion system with PSI scanners and AI OCR. Exports recognised data to S_CertImports.
+* DMZ → Internal Sync - API-based synchronisation for agent corrections.
+* Email Service – Microsoft 365 SMTP; outbound queued in Plateau DB and processed internally.
+
 ### Feature List (MVP)
 
 | Feature | Description | Est., H |
