@@ -321,6 +321,30 @@ Integrations:
 | Developer FS | Builds Blazor UI, forms, dashboards, and approval screens using the existing component kit.<br>Implements APIs, workflow logic, and data access | 1 FTE |
 | QA Engineer | End-to-end testing, regression, and UAT support. | As needed |
 
+### Assumptions (MVP)
+
+* The Certificates module will be developed inside the existing Plateau Web portal.
+* No new standalone web app or DB server required.
+* Use existing Azure AD / Auth0 authentication.
+* DocMgmt + OCR system is assumed to exist and provide structured data output. Only integration and QA verification layers are in scope. If the OCR service is unavailable, Plateau will either provide its API or confirm the need for a replacement engine before development starts.
+* All existing Access-based logic (snapshot checks, rule validations, and audit placeholders) can be accessed or exported for migration.
+* Authentication and role management will rely on existing infrastructure: Azure AD (internal) and Auth0 (DMZ); no new identity provider is introduced.
+* Document generation and storage will leverage existing ShareFile and DocMgmt infrastructure; no new PDF/letter builder will be introduced unless Plateau explicitly requests it.
+* System non-functional goals (load, concurrency, RPO/RTO) are assumed to match existing Plateau web standards until defined otherwise.
+* All outgoing agent communications will use Plateau's Microsoft 365 SMTP relay, routed internally for compliance.
+
+### Risks (MVP)
+
+* Unclear whether a functional OCR API/database already exists within DocMgmt; lack of clarity may lead to major architectural rework if a new OCR pipeline is required.
+* No confirmed API or schema for OCR data export; may require discovery and schema mapping effort.
+* If OCR or document generation are deemed "not existing," MVP effort could increase by 30–50%.
+* Unclear if Plateau has an active templating or PDF generation system (e.g., Write Signature, ShareFile automation). If not, new document generation logic will be needed.
+* Access snapshot and validation rules are extensive and poorly documented; extracting and replicating logic may take longer than planned.
+* Incomplete mapping between old Access tables and new SQL structures could delay certificate import and balancing.
+* Inbound email threading may depend on Microsoft 365 API permissions not yet been confirmed.
+* A lack of clarity on which totals (report, certificate, remittance) are authoritative could cause mismatched financial results.
+* Legally required letters (life/disability/AD&D changes) must be generated correctly; if templates or workflows are missing, regulatory risk arises.
+
 ---
 
 *This comprehensive documentation provides a complete overview of the TransCredit project, from high-level business context to detailed system analysis and target state, ensuring all stakeholders understand the current state, challenges, and future vision.*
