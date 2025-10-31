@@ -311,6 +311,16 @@ Integrations:
 | Email Server | Service to track Inbound and Outbound emails based on Microsoft 365 SMTP | |
 | Email Service UI | Show all inbound/outbound emails with timestamps, subject/body preview, attachments list, and the linked AgentReportEmail ID; allow sending follow-ups directly from this tab. | |
 
+### Team Composition (MVP)
+
+| Role | Responsibility | Allocation |
+|---|---|---|
+| Project Manager | Client communication, scope control, prioritisation, and sprint planning. | Cross |
+| Business Analyst | Process mapping, requirement detailing, backlog management, user stories, and acceptance criteria. | Cross |
+| Tech Lead | Defines system architecture, integration approach, API contracts, data flow. Coordinates with Client SMEs | As needed |
+| Developer FS | Builds Blazor UI, forms, dashboards, and approval screens using the existing component kit.<br>Implements APIs, workflow logic, and data access | 1 FTE |
+| QA Engineer | End-to-end testing, regression, and UAT support. | As needed |
+
 ---
 
 *This comprehensive documentation provides a complete overview of the TransCredit project, from high-level business context to detailed system analysis and target state, ensuring all stakeholders understand the current state, challenges, and future vision.*
