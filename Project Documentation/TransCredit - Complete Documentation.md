@@ -262,6 +262,7 @@ Monthly report processing is completed.
 ## 🚀 To Be (Desired State)
 
 ### Process Diagram
+
 ![TransCredit To Be Process](./TransCredit%20-%20To%20Be.svg)
 
 ### Technology Stack (MVP)
