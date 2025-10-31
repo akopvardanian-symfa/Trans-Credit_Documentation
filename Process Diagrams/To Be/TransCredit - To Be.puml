@@ -1,0 +1,371 @@
+@startuml TransCredit_To_Be_Process
+title TransCredit To Be - Automated Certificate Processing (MVP)
+
+skinparam activity {
+  BackgroundColor #fefefe
+  StartColor #4CAF50
+  EndColor #4CAF50
+}
+
+legend right
+  <<NEW>>   Newly introduced capability in MVP
+  <<MOD>>   Modernized/automated vs. As Is manual step
+  <<KEEP>>  Step retained from As Is
+end legend
+
+start
+
+:Receive Agent Report & Documents; <<KEEP>>
+note right
+  Actor: Agent
+  WHAT CHANGES: Agents continue sending via email (no change)
+  - Email attachments (PRIMARY METHOD - agents continue as before)
+  - Agents will NOT use web portal for initial document upload
+  - Some agents will always send via email regardless of portal
+  WHY: Agents already work with government interfaces, cannot
+  ask them to re-enter data in another web form
+  Actor actions: Agent sends documents via email as before.
+  No change in agent workflow.
+end note
+
+:Email Server (Inbound Processing); <<NEW>>
+note right
+  Actor: System (Azure Listener/Webhook)
+  WHAT CHANGES: Automated email processing replaces manual
+  - Azure webhook/listener for incoming emails (NEW)
+  - Parse subject line for Certificate ID (auto-link)
+  - Example: "CERT_12345 - Report Correction"
+  - Extract attachments, associate with certificates
+  - Route to DocMgmt for OCR processing
+  Actor actions: System automatically processes incoming
+  emails, extracts attachments, links to certificates.
+end note
+
+:Assign Report Number and Description; <<KEEP>>
+note right
+  Actor: Internal Staff
+  WHAT CHANGES: Same process, new system
+  Report description types:
+  - Manual processing: "August bath" (city)
+  - e-remit (electronic payment): "August ER" 
+  - Website upload: "August upload"
+  - Email receipt: "August email" (most common)
+  Note: DMZ is NOT used for initial document upload,
+  only for error corrections later in the process
+  Actor actions: Staff member assigns report number
+  and description based on receipt method (primarily email).
+end note
+
+:OCR Data Ingestion (DocMgmt → S_CertImports); <<KEEP>>
+note right
+  Actor: System (DocMgmt/AI OCR)
+  WHAT CHANGES: Automated OCR replaces manual entry
+  - Existing DocMgmt + AI OCR pipeline (if available)
+  - If unavailable: use Google/Microsoft API (fallback)
+  - Returns JSON with fields + confidence (0-1)
+  - Exports to S_CertImports table
+  - No new OCR built from scratch
+  Actor actions: System automatically processes documents,
+  extracts data via OCR, exports structured data.
+end note
+
+:QA Review UI (Internal) - MANDATORY; <<NEW>>
+note right
+  Actor: Operator (Internal Staff)
+  WHAT CHANGES: NEW mandatory step - replaces direct manual entry
+  - Operator verifies OCR-extracted data before import
+  - Left side: original document (scanned PDF/image)
+  - Right side: key-value fields from OCR (structured)
+  - Operator corrects low-confidence fields (confidence < 0.7)
+  - Marks each row Pass/Fail
+  - Only after Pass → proceeds to import
+  WHY: Prevents validation errors from bad OCR data
+  Actor actions: Operator reviews OCR output against
+  source document, corrects errors, confirms accuracy.
+end note
+
+if (QA Pass?) then (yes)
+  :Idempotent Import to Core (SQL/EF); <<NEW>>
+  note right
+    Actor: System (C#/.NET Service)
+    WHAT CHANGES: Automated import replaces manual entry
+    - Create/Update certificates in APS Plateau with
+      deterministic keys (no duplicates)
+    - Track source (OCR/DMZ/manual) + document reference
+    - NOW certificates exist in core DB
+    Actor actions: System automatically imports verified
+    certificate data into production database.
+  end note
+  
+  :Automated Error Detection Service; <<NEW>>
+  note right
+    Actor: System (C#/.NET Service)
+    WHAT CHANGES: Automated validation replaces manual "Run Snapshot"
+    Validation runs AFTER import (not before QA Review):
+    - Age limits (too old for insurance)
+    - Premium calculation errors
+    - Coverage amount mistakes
+    - Refund method (pro-rata vs Rule 78)
+    - Duplicate policy detection
+    - Birthday-based coverage end dates
+    - Multiple policy violations
+    Ported from Access/SQL logic.
+    Actor actions: System automatically validates all
+    imported certificates using business rules.
+  end note
+  
+  if (Validation errors found?) then (yes)
+    :View Error Summary; <<NEW>>
+    note right
+      Actor: Operator (Internal Staff)
+      WHAT CHANGES: NEW automated error grouping and display
+      - Display grouped errors by type and severity
+      - Per certificate error drill-down
+      - One-click export to spreadsheet
+      - Replaces manual error list viewing
+      Actor actions: Operator views automated error summary,
+      drills into specific certificate errors.
+    end note
+    
+    :Notify Agent of Errors (via DMZ or Email); <<NEW>>
+    note right
+      Actor: System (Email Service) / Internal Staff
+      WHAT CHANGES: Automated error notifications
+      - Send error summary to agent via DMZ portal (NEW)
+      - OR via email with error spreadsheet attachment
+      - Auto-generate subject: "CERT_ID - Error Report"
+      Actor actions: System generates and sends error
+      notification. Staff may customize message.
+    end note
+    
+    :DMZ Certificates Portal - Agent Self-Correction; <<NEW>>
+    note right
+      Actor: Agent (via DMZ Portal with Auth0 MFA)
+      WHAT CHANGES: NEW agent self-service portal FOR CORRECTIONS ONLY
+      IMPORTANT: DMZ portal is NOT used for initial document upload.
+      Agents continue sending documents via email as before.
+      DMZ portal is ONLY used when validation errors are found
+      and agent needs to correct specific failed fields.
+      CRITICAL: Agent edits ONLY failed fields:
+      - Verified fields are DISABLED (not editable)
+      - Only error fields can be corrected
+      - Prevents full re-verification each time
+      - Bulk CSV/XLSX upload supported for corrections
+      - Changes saved in DMZ DB (not core yet)
+      Actor actions: Agent logs into DMZ portal (only when errors found),
+      views pending report with errors, edits only failed fields.
+    end note
+    
+    :Agent Completes Corrections; <<NEW>>
+    note right
+      Actor: Agent (via DMZ Portal)
+      WHAT CHANGES: NEW automated notification
+      - When agent finishes editing, save changes in DMZ DB
+      - Insert OpsLog event: "report ready for review"
+      - Internal staff automatically notified
+      Actor actions: Agent completes corrections, submits.
+      System creates OpsLog event for internal review.
+    end note
+    
+    :Correction & Approval Workflow; <<NEW>>
+    note right
+      Actor: Internal Staff (Operators/Reviewers)
+      WHAT CHANGES: NEW side-by-side diff viewer and approval
+      - View side-by-side diff (DMZ changes vs current values)
+      - Approve/reject per field or per certificate
+      - On approval → apply changes to core DB
+      - Regenerate balances and error summaries
+      Actor actions: Internal staff reviews agent corrections,
+      approves/rejects changes, applies to production.
+    end note
+    
+  else (no)
+    :No Validation Errors Found; <<MOD>>
+    note right
+      Actor: System
+      WHAT CHANGES: Automated check - no manual action needed
+      Proceed directly to balancing.
+    end note
+  endif
+
+else (no)
+  :Return to QA Backlog; <<KEEP>>
+  note right
+    Actor: Operator (Internal Staff)
+    WHAT CHANGES: Same process, new system
+    Certificate remains in QA backlog for operator
+    to correct OCR errors or request agent resubmission.
+    Actor actions: Operator marks as Fail, returns to backlog.
+  end note
+endif
+
+:Enhanced Certificate Search; <<NEW>>
+note right
+  Actor: Operator (Internal Staff)
+  WHAT CHANGES: Extended search capabilities
+  NEW search fields:
+  - First/Last Name (wildcards supported)
+  - Birthday
+  - SSN (including last 4 digits search)
+  - Claim Number
+  - Certificate Number (existing)
+  - Indexed fields for performance and partial matches
+  Actor actions: Operator searches certificates using
+  multiple criteria, finds relevant records quickly.
+end note
+
+:Automated Balancing Module; <<NEW>>
+note right
+  Actor: System (C#/.NET Service)
+  WHAT CHANGES: Automated balancing replaces manual calculations
+  - Compute deltas between:
+    * Agent report totals
+    * Certificate totals  
+    * Remittance figures
+  - Generate correction documents (like correcting invoices)
+  - Example: invoice $950 → create correcting invoice +$50 = $1000 total
+  - Produce exception/billing summary automatically
+  Actor actions: System automatically calculates balances,
+  generates correction documents, creates billing summary.
+end note
+
+:Generate Agent Billing & Exception Report; <<MOD>>
+note right
+  Actor: System (C#/.NET Service)
+  WHAT CHANGES: Automated generation replaces manual creation
+  - Show money owed or returned based on corrections
+  - Generate exception report (what was changed)
+  - Create billing statement automatically
+  Actor actions: System generates billing and exception
+  reports showing financial impact of corrections.
+end note
+
+:Agent & Customer Notifications (Email Service); <<NEW>>
+note right
+  Actor: System (Email Service - M365 SMTP / DMZ SMTP)
+  WHAT CHANGES: Automated notifications with legal compliance
+  Outbound notifications:
+  - M365 SMTP for internal communications (internal only)
+  - Separate DMZ SMTP for external (customers/agents)
+  - Auto-generate subject: "CERT_ID - Error Report"
+  - Send error summaries and billing to agents
+  - LEGAL REQUIREMENT: Notify customers when coverage/premium
+    changes (life/disability/AD&D) - AUTOMATED
+  - Store generated PDFs in ShareFile automatically
+  Actor actions: System automatically generates and sends
+  notifications to agents and customers (where required by law).
+end note
+
+:Run Over Limits Check (Automated); <<MOD>>
+note right
+  Actor: System (C#/.NET Service)
+  WHAT CHANGES: Automated check replaces manual "Run OLIST" button
+  - Automatic check if customer exceeds coverage limits
+  - Uses cumulative policy data across all active policies
+  - Checks agent's maximum coverage limit per customer
+  - Example: $100,000 limit per agent
+  Actor actions: System automatically checks coverage limits
+  when new certificate is processed.
+end note
+
+if (Coverage limits exceeded?) then (yes)
+  :Notify Internal Staff of Limit Exceedance; <<MOD>>
+  note right
+    Actor: System
+    WHAT CHANGES: Automated notification replaces manual checking
+    System flags limit exceedance, notifies internal staff
+    for review and agent contact if needed.
+  end note
+  
+  :Contact Agent for Verification; <<KEEP>>
+  note right
+    Actor: Internal Staff
+    WHAT CHANGES: Same process, new system
+    Ask agent if older policies are still active
+    due to exceeding coverage limits.
+    Actor actions: Staff contacts agent via email or phone.
+  end note
+  
+  if (Multiple policies active?) then (yes)
+    :Reduce New Policy Coverage; <<MOD>>
+    note right
+      Actor: Internal Staff / System
+      WHAT CHANGES: Automated calculation, manual confirmation
+      - System calculates maximum allowed coverage
+      - Staff reviews and confirms reduction
+      - Apply coverage adjustment to certificate
+      Actor actions: Staff reviews calculation, confirms
+      coverage reduction, system applies changes.
+    end note
+    
+    :Generate Customer Notification (Legal Requirement); <<NEW>>
+    note right
+      Actor: System (Email Service)
+      WHAT CHANGES: Automated legal notifications (NEW)
+      - LEGAL REQUIREMENT: Notify customer of reduction
+      - System automatically generates and sends notice
+      - Stores PDF in ShareFile
+      Actor actions: System generates customer notification
+      letter and sends via DMZ SMTP.
+    end note
+    
+  else (no)
+    :Agent Can Proceed with New Policy; <<KEEP>>
+    note right
+      Actor: Internal Staff
+      If agent forgot to send cancellation, they will
+      send it and cancel old policy before proceeding.
+    end note
+  endif
+  
+else (no)
+  :Within Coverage Limits; <<MOD>>
+  note right
+    Actor: System
+    Automated check confirms no limit exceedance.
+  end note
+endif
+
+:OpsLog Events & Audit Trail; <<NEW>>
+note right
+  Actor: System (Audit Service)
+  WHAT CHANGES: Comprehensive automated audit trail
+  - Emit structured events to OpsLog for:
+    * DMZ staging
+    * Agent completion
+    * QA approvals
+    * Certificate updates
+    * Communications sent/received
+    * Balancing milestones
+  - Field-level audit: ChangedValue, RecordId, OldValue,
+    NewValue, Reason, ChangedBy, ChangeDate
+  - Enables end-to-end traceability
+  Actor actions: System automatically logs all events
+  and changes with complete audit trail.
+end note
+
+:Generate Reports (Automated); <<MOD>>
+note right
+  Actor: System
+  WHAT CHANGES: Automated report generation replaces printing
+  - Generate financial balance report (PDF/ShareFile)
+  - Generate customer list report (PDF/ShareFile)
+  - Store in ShareFile automatically
+  - No manual printing required
+  Actor actions: System generates reports automatically,
+  stores in ShareFile for archival.
+end note
+
+:Complete Monthly Report Processing; <<MOD>>
+note right
+  Actor: System / Internal Staff
+  WHAT CHANGES: Reduced manual work, automated completion
+  System marks report as complete after all validations
+  and balances are correct. Staff final review only if needed.
+  Actor actions: System completes processing, staff reviews
+  and confirms completion if required.
+end note
+
+stop
+
+@enduml
