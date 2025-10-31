@@ -58,10 +58,10 @@ The **TransCredit system** (used by Plateau Group) handles:
 
 Here is the detailed step-by-step process:
 
-##### 1. Receive Monthly Sales Report
+##### 1. **Receive Monthly Sales Report**
 Banks and credit unions send monthly reports showing how many insurance policies they sold. The report contains: who bought insurance, how much they paid, what health information they provided. It also shows how much money the bank owes Plateau Group for the sold insurance policies.
 
-##### 2. Assign Report Number and Description
+##### 2. **Assign Report Number and Description**
 Staff member logs into TransCredit system, creates a new report record and assigns it a number. The staff member gives the report an internal name based on how it was received:
 
 - **Manual processing**: "August Bath" (month + city where bank is located)
@@ -70,19 +70,19 @@ Staff member logs into TransCredit system, creates a new report record and assig
 
 This internal naming helps staff immediately identify how each report was received and processed.
 
-##### 3. Enter Certificate Information into TransCredit System
+##### 3. **Enter Certificate Information into TransCredit System**
 Staff member enters data for each insurance certificate into the system. If a certificate has no number (bank's printing problem), they use the last 4 digits of SSN. They notify agent services about the printing issue so they can contact the bank and fix the printing problem.
 
 **Important**: Data is entered exactly as printed, even if they know it's wrong.
 
-##### 4. Check Health Questions Status
+##### 4. **Check Health Questions Status**
 Staff member checks if the customer answered health questions and sets a system code in TransCredit:
 - **Code "1"**: Health questions answered
 - **Code "3"**: Health questions NOT answered (triggers system error)
 
 For disability insurance, ALL health questions must be answered before the policy can be processed.
 
-##### 5. Run Snapshot Validation
+##### 5. **Run Snapshot Validation**
 Staff member clicks "Run Snapshot" button and system checks all certificates for errors:
 - Is customer too old for insurance
 - Is premium calculated correctly
@@ -92,23 +92,23 @@ Staff member clicks "Run Snapshot" button and system checks all certificates for
 - Printing errors (extra premiums)
 - Limit violations
 
-##### 6. Error Processing (95% of work time)
+##### 6. **Error Processing (95% of work time)**
 If errors are found, the most time-consuming part begins. Staff spend 95% of time fixing errors that banks make. Errors happen because:
 - Bank employee entered data incorrectly in their system
 - Bank's system works incorrectly
 - Bank's platform cannot help
 
 When fixing errors:
-###### 6.1 View error list
-###### 6.2 Enter data exactly as bank submitted (even if they know it's wrong)
-###### 6.3 Balance to original amounts (critically important - before corrections)
-###### 6.4 Create exception report (what they changed)
-###### 6.5 Update system with correct amounts
-###### 6.6 Print updated error list
-###### 6.7 Generate billing for bank (how much they owe or get back)
-###### 6.8 Notify bank of changes (billing + explanations + customer letters)
+###### 6.1 **View error list**
+###### 6.2 **Enter data exactly as bank submitted (even if they know it's wrong)**
+###### 6.3 **Balance to original amounts (critically important - before corrections)**
+###### 6.4 **Create exception report (what they changed)**
+###### 6.5 **Update system with correct amounts**
+###### 6.6 **Print updated error list**
+###### 6.7 **Generate billing for bank (how much they owe or get back)**
+###### 6.8 **Notify bank of changes (billing + explanations + customer letters)**
 
-##### 7. Run Over Limits Check
+##### 7. **Run Over Limits Check**
 Staff member clicks "Run OLIST" button and system checks if customer exceeds coverage limits. For example, if customer already has $50,000 insurance and bank sold another $60,000, then the $100,000 limit is exceeded.
 
 **Business Context - Multiple Policies Active:**
@@ -128,25 +128,25 @@ If limit exceeded:
 - **Bank can keep new insurance** if they cancel old one
 
 **Practical Example:**
-###### 1. Customer John has $50,000 insurance through Bank A
-###### 2. Takes new loan at Bank B for $80,000
-###### 3. Bank B offers $80,000 insurance
-###### 4. System checks: $50,000 + $80,000 = $130,000 > Bank B's $100,000 limit
-###### 5. Bank B must either reduce insurance to $50,000 or confirm Bank A's policy is cancelled
+###### 1. **Customer John has $50,000 insurance through Bank A**
+###### 2. **Takes new loan at Bank B for $80,000**
+###### 3. **Bank B offers $80,000 insurance**
+###### 4. **System checks: $50,000 + $80,000 = $130,000 > Bank B's $100,000 limit**
+###### 5. **Bank B must either reduce insurance to $50,000 or confirm Bank A's policy is cancelled**
 
-##### 8. Print Report
+##### 8. **Print Report**
 Print main report with financial balance.
 
-##### 9. Print Customer List
+##### 9. **Print Customer List**
 Print list of all customers in the report.
 
-##### 10. Scan All Documents Together
+##### 10. **Scan All Documents Together**
 Scan all documents together for archive:
 - Report
 - Customer list
 - All supporting documents
 
-##### 11. Complete Monthly Report Processing
+##### 11. **Complete Monthly Report Processing**
 Monthly report processing is completed.
 
 ### Error Correction Process (Detailed)
