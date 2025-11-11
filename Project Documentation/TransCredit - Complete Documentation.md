@@ -265,6 +265,18 @@ Monthly report processing is completed.
 
 ![TransCredit To Be Process](./TransCredit%20-%20To%20Be.svg)
 
+### MVP Phases Overview
+
+The TransCredit MVP is structured in multiple phases to enable incremental delivery:
+
+* **MVP Phase 1 (In Progress)**: Focuses on core certificate input, validation, and editing functionality. This phase establishes the foundation for certificate management with validation logic, versioning, and basic editing capabilities. OCR integration works automatically as a byproduct of this work.
+
+* **MVP Phase 2 (Next Focus)**: Builds upon Phase 1 to add comprehensive error management and correction workflows. Priority order: Error Summary UI → Certificate Error Checking Service → Certificate Editing (Error Correction Flow) → Email Communication UI → Cert QA Review UI.
+
+* **Future Phases**: Additional features such as Correction & Approval Workflow, Balancing Module enhancements, and other advanced capabilities will be addressed after core components are complete.
+
+This phased approach allows development to proceed on Phase 1 while business requirements are being gathered for subsequent phases.
+
 ### Technology Stack (MVP)
 
 Frontend:
@@ -286,34 +298,91 @@ Deployment and Environments:
 
 Authentication / Authorisation:
 * Azure Active Directory (SSO + MFA) – Confirmed as the primary auth provider for internal users.
-* Auth0 – Used on public DMZ site for agents; new agents flagged for “initial setup wizard.”
 * RBAC – Role-based access controlled by Active Directory groups (APS Admin, Operators, etc.).
 * No new roles required for MVP; existing groups cover all permissions.
+* Note: DMZ portal already exists and uses Auth0; not part of Phase 1 scope.
 
 Integrations:
-* DocMgmt & OCR - Existing document ingestion system with PSI scanners and AI OCR. Exports recognised data to S_CertImports.
-* DMZ → Internal Sync - API-based synchronisation for agent corrections.
-* Email Service – Microsoft 365 SMTP; outbound queued in Plateau DB and processed internally.
+* DocMgmt & OCR - Existing document ingestion system with PSI scanners and AI OCR. OCR works automatically via shared components with manual certificate UI (no separate integration work needed).
+* Email Service – Microsoft 365 SMTP; outbound queued in Plateau DB and processed internally. Backend code ready (Ammon finishing network services setup).
+* Note: DMZ → Internal Sync not in Phase 1 scope (DMZ portal already exists).
 
 ### Feature List (MVP)
 
+The MVP is divided into multiple phases. Phase 1 focuses on core certificate input and validation functionality, while Phase 2 adds error management and correction workflows.
+
+#### 🟢 MVP Phase 1 (In Progress)
+
 | Feature | Description | Est., H |
 |---|---|---|
-| DMZ Certificates Portal | Expose a DMZ page where agents are able to:<br>Create a report.<br>Upload certificates into it.<br>Open a “pending report,” see all copied certificates and supporting data for that report, and start a correction session. Agents authenticate via Auth0 MFA. | 8 days:<br>authorization = 2d<br>UI prototype (front/back) = 3d<br>DTO storage, integrations = 3d |
-| DMZ Certificate Update Forms | Allow agents to edit only the fields that require correction for the pending report (not full data entry).<br>Save changes in the DMZ database.<br>When an agent finishes editing, insert an OpsLog record so internal users are notified that a report is ready for review and approval.<br>After internal approval, update core tables with approved values and delete the temporary agent report and certificate records from DMZ.<br>Permit agents to upload a structured spreadsheet (CSV/XLSX) with corrections for all or selected certificates on the pending report; parse, validate schema, and stage the row-level deltas for review. | 8 days:<br>editing page = 3d<br>parsing = 3d<br>backend for editing = 2d per page |
-| OCR Ingestion Integration | Consume structured data exported by the existing DocMgmt + AI OCR pipeline (which ingests the agents’ scanned forms).<br>Do not build OCR; integrate with its output tables/feeds. | OCR – not relevant |
-| Cert QA Review UI | Provide an internal web UI for operators to verify OCR-extracted fields, complete missing data, and mark each row Pass/Fail before promoting into APS Plateau certificates. | 5 days |
-| Certificate Import & Idempotency | On QA “Pass,” create or update certificates in APSmPlateau with deterministic keys to avoid duplicates; track source (OCR/DMZ/manual) and the original document reference for audit. | 4 days |
-| Enhanced Certificate Search | Extend CertificateSearch component with fields:<br>First/Last Name (wildcards),<br>Birthday,<br>SSN (incl. last 4 digits),<br>Claim Number;<br>index fields for performance and support partial matches. | 2 days |
-| Certificate Error Checking Service | Port snapshot/error logic from Access/SQL into a C# service used by QA, DMZ-review, and internal edits: age limits, 30-day free-look refunds, coverage/amount limits, duplicate policy detection, refund method, birthday-based coverage end dates, etc. | 5 days + SPIKE |
-| Error Summary UI | Surface grouped validation errors (by type and severity) for a report and per certificate; provide drill-down to failing fields and one-click export to spreadsheet. | 3 days |
-| Correction & Approval Workflow | Provide a side-by-side diff viewer (DMZ changes vs current values). Allow approve/reject per field or per certificate, apply changes to APS Plateau, and regenerate balances and error summaries after approval. | 8 days |
-| Balancing Module | Compute and display deltas between agent report totals, certificate totals, and remittance figures; show the effect of corrections on balances and generate an exception/billing summary when deltas remain. | 8 days |
-| Agent Notification | Generate billing/exceptions message that clearly explains adjustments (reduced coverage, premium changes, refund corrections); support legally required customer notices when life/disability/AD&D premiums are changed.<br>Send the message to the DMZ portal | 5 days + SPIKE |
-| Audit Trail & Logging | On any edit to an existing certificate, require a “Reason for change,” and write a field-level audit record: ChangedValue (field), RecordId, OldValue, NewValue, Reason, ChangedBy, ChangeDate. Provide a collapsible CertAudit component on CertificateDetails. | 3 days |
-| OpsLog Unification & Events | Emit structured events to OpsLog for: DMZ staging, agent completion, QA approvals, certificate updates, comms sent/received, and balancing milestones - enabling end-to-end traceability and operational dashboards.<br>Сertificates and PDFs are stored in ShareFile. | 2 days |
-| Email Server | Service to track Inbound and Outbound emails based on Microsoft 365 SMTP | 5 days + SPIKE |
-| Email Service UI | Show all inbound/outbound emails with timestamps, subject/body preview, attachments list, and the linked AgentReportEmail ID; allow sending follow-ups directly from this tab. | 9 days + SPIKE |
+| Certificate Creation Page Completion | Finalise the existing "Add Certificate" page: ensure all required fields are functional, enable saving new certificates to the database, and run validation on save. UI is mostly complete; needs connection to DI Certificate Service and data persistence. | 12h |
+| Certificate Editing | Enable full editing of certificate details. Base functionality for editing certificates. | 8h |
+| Change Reason Tracking | Require users to provide a reason for any certificate change; allow selecting predefined reasons or entering a custom one. Record all certificate modifications (old/new values, reasons, user, date). | 10h |
+| Certificate Versioning | Maintain version history for each certificate record. Each agent enhancement round should create a new version entry capturing the full snapshot of certificate data at the time of change. Versions can be compared to highlight differences between any two states (e.g., "before vs after" view). | 16h |
+| Certificate Validation | Extend the existing validation logic (already migrated from Access) by adding remaining missing checks and enabling persistent storage of validation results in the database. Approximately 80% of checks are implemented in DI; remaining ones need to be ported from Access. Validation should run on save/update. | 8h |
+| Error Storage and Management | Store validation errors in the database, track their status (open/resolved), and display them in the interface (issues tab). | 6h |
+| Enhanced Certificate Search | Add extended search criteria (name, date of birth, SSN, claim number, agent) and an advanced search mode. | 8h |
+| Email Integration | Implement backend tables for inbound/outbound emails and attachments; integrate with the client's email service via DB. **Symfa work (16h)**: Create DB tables for emails and attachments. **Ammon work**: Backend service that interacts with Exchange server (reads/writes to Symfa's tables) - Ammon finishing network services setup. | 16h |
+| Email Communication UI | Improve the communications interface, add logic (Get Emails/Create an Email). | 8h |
+| Error Export and Attachment | Allow users to export validation errors to Excel/CSV and attach them to outgoing emails. | 8h |
+| OCR Ingestion Integration | OCR system already exists and works automatically via shared components with manual certificate UI. No separate work needed - will work as a byproduct of Phase 1 validation work. | Automatic byproduct |
+
+**Note:** OCR integration works automatically because it uses the same components as the manual certificate creation page. As Phase 1 validation and controls are built, OCR will automatically benefit from the same error checks and validations.
+
+#### 🟡 MVP Phase 2 (Next Focus - Priority Order)
+
+**Priority 1: Start here**
+| Feature | Description | Status |
+|---|---|---|
+| Error Summary UI | Screen for grouped certificate errors (by type, severity) with drill-down. Loads from cert error table. This is the recommended starting point for Phase 2. | UI ready; needs cert error table |
+
+**Priority 2: High priority**
+| Feature | Description | Status |
+|---|---|---|
+| Certificate Error Checking Service | Port remaining validation/error logic from Access/SQL into a C# service. Expand current validation error logic to include anything missing, then store information in new certificate error table. Approximately 80% of logic is done in DI Certificate Service; need to port remaining rules and add CertError table with CRUD operations. | Logic 80% done; needs table + CRUD |
+| Error Storage and Management | Store and manage validation errors (open/resolved). Part of Certificate Error Checking Service - implements cert error table. | Part of Error Checking Service |
+
+**Priority 3: After Error Summary UI**
+| Feature | Description | Status |
+|---|---|---|
+| Certificate Editing (Error Correction Flow) | Integration with Error Summary UI to correct errors. When operators see errors, they click to open certificate edit page, make corrections, save, and errors are marked as cleared. Uses Phase 1 editing functionality. | Uses Phase 1 editing |
+
+**Priority 4: After Editing**
+| Feature | Description | Status |
+|---|---|---|
+| Email Communication UI | UI for reading/sending emails and linking to certificates. Includes ability to attach error spreadsheets. Currently only a demo exists; needs full implementation with DB tables. | Demo exists; needs full implementation |
+
+**Priority 5: Testing & QA**
+| Feature | Description | Status |
+|---|---|---|
+| Cert QA Review UI | QA review of OCR data (Pass/Fail) and promotion to APS Plateau. UI is ready; needs testing with new validation logic. | UI ready; needs testing |
+| Certificate Import & Idempotency | Controlled import/update of certificates after QA Pass. Handled as part of QA Review flow. | Part of QA Review flow |
+
+#### ⏸️ Future Phases / Later
+
+| Feature | Description | Status |
+|---|---|---|
+| Correction & Approval Workflow | Side-by-side comparison (DMZ vs APS), approve/reject flow. Postponed until much later, if ever. | Postponed |
+| Balancing Module | Transaction and totals reconciliation logic. Happy path works, but mismatched cases need business review with Tanya. Needs expansion. | Needs business alignment |
+| Change Reason Tracking | Mandatory reason/comment when editing certificate data. Will be part of future Correction Workflow. | Future phase |
+| Enhanced Certificate Search | Advanced search filters (DOB, SSN, agent, etc.). Not in current focus. | Future phase |
+| Error Export and Attachment | Export errors to Excel/CSV and attach to outgoing emails. Planned later. | Future phase |
+
+#### ✅ Already Complete / No Action Required
+
+| Feature | Description | Status |
+|---|---|---|
+| DMZ Certificates Portal | External portal for agents to upload and review pending reports. | Already exists and working |
+| Agent Notification | Automatic notifications to agents. | Working and complete |
+| OpsLog Unification & Events | System event tracking (creation, QA, corrections, etc.). Fully implemented and reusable. | Fully implemented |
+| Email Server | Microsoft 365 SMTP backend service. | Configured by Ammon |
+| Email Integration (Backend Service) | Backend service code ready; Ammon finishing network services setup. This service reads/writes to DB tables that Symfa creates in Phase 1. | Ammon completing setup |
+
+#### ⏸️ Out of Scope
+
+| Feature | Description | Status |
+|---|---|---|
+| DMZ Certificate Update Forms | External forms for agents to correct certificates. Dropped - agents won't edit through DMZ. Manual handling only. | Out of scope |
 
 ### Team Composition (MVP)
 
@@ -328,26 +397,24 @@ Integrations:
 ### Assumptions (MVP)
 
 * The Certificates module will be developed inside the existing Plateau Web portal.
+* The public agent-facing portal (DMZ) is not in scope for Phase 1; DMZ Certificates Portal already exists and is working.
 * No new standalone web app or DB server required.
-* Use existing Azure AD / Auth0 authentication.
-* DocMgmt + OCR system is assumed to exist and provide structured data output. Only integration and QA verification layers are in scope. If the OCR service is unavailable, Plateau will either provide its API or confirm the need for a replacement engine before development starts.
+* An OCR system exists and provides structured data output. OCR integration works automatically via shared components with manual certificate UI - no separate work needed for Phase 1.
+* Outbound and inbound email processing will be handled by Plateau's internal Microsoft 365 infrastructure. The Symfa team will only manage database records for email UI.
 * All existing Access-based logic (snapshot checks, rule validations, and audit placeholders) can be accessed or exported for migration.
-* Authentication and role management will rely on existing infrastructure: Azure AD (internal) and Auth0 (DMZ); no new identity provider is introduced.
-* Document generation and storage will leverage existing ShareFile and DocMgmt infrastructure; no new PDF/letter builder will be introduced unless Plateau explicitly requests it.
+* Authentication and role management will rely on existing infrastructure: Azure AD (internal); no new identity provider is introduced.
+* Document generation and storage will leverage existing ShareFile; no new PDF/letter builder will be introduced unless Plateau explicitly requests it.
 * System non-functional goals (load, concurrency, RPO/RTO) are assumed to match existing Plateau web standards until defined otherwise.
 * All outgoing agent communications will use Plateau's Microsoft 365 SMTP relay, routed internally for compliance.
 
 ### Risks (MVP)
 
-* Unclear whether a functional OCR API/database already exists within DocMgmt; lack of clarity may lead to major architectural rework if a new OCR pipeline is required.
-* No confirmed API or schema for OCR data export; may require discovery and schema mapping effort.
-* If OCR or document generation are deemed "not existing," MVP effort could increase by 30–50%.
-* Unclear if Plateau has an active templating or PDF generation system (e.g., Write Signature, ShareFile automation). If not, new document generation logic will be needed.
-* Access snapshot and validation rules are extensive and poorly documented; extracting and replicating logic may take longer than planned.
-* Incomplete mapping between old Access tables and new SQL structures could delay certificate import and balancing.
-* Inbound email threading may depend on Microsoft 365 API permissions not yet been confirmed.
-* A lack of clarity on which totals (report, certificate, remittance) are authoritative could cause mismatched financial results.
-* Legally required letters (life/disability/AD&D changes) must be generated correctly; if templates or workflows are missing, regulatory risk arises.
+* Legacy data mapping between old Access structures and the new SQL schema may require additional adjustments during migration.
+* Access snapshot and validation rules are extensive and poorly documented; extracting and replicating remaining logic (approximately 20% not yet ported) may take longer than planned.
+* Ownership of financial totals (which layer is authoritative) must be confirmed to prevent balancing discrepancies.
+* Legally required customer letters and notifications must follow approved templates and compliance workflows; missing templates could delay production rollout.
+* If dynamic template-based document generation is later requested, new infrastructure or integration effort may be required beyond the current MVP scope.
+* Balancing Module happy path works, but mismatched cases need business review with Tanya to understand how to handle situations when numbers don't add up as expected.
 
 ---
 

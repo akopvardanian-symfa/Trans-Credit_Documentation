@@ -1,0 +1,374 @@
+FW: TransCredit Full Scope Exploration Session - November 10
+
+
+
+
+ - Akop Vardanian
+Scope of the Transcredit, because for us it necessary to understand how much time it will take, I mean in 2026 how much resources, how many resources we need to this, and last Friday we had a call with Kyle and with Tona, and it seems like we still have some open questions to you, and only you may answer them and help us.
+So, Akop, I will ask you to pick up and start the discussion. Yes, sure, yes, sure. Thank you for your time, dear colleagues.
+Can I ask you, Julia, to turn on the recording? Yeah, my recording is already here. Oh, yeah, I can see you.
+Okay. This is AI generation, you know. So, okay, Ammon, I know that you already discussed the MVP scope that our team are committed to deliver.
+I also... Talked with Alex, our architect, whom you have also talked to about the upcoming tasks. We found that after the MVP items we have already agreed on, we are not quite sure what to focus on next.
+So that's why we need your help to understand our next steps. I'm not sure if you need to take a look on the MVP scope one more time, or you already can, let's say, navigate us where to go to dig in.
+
+ - Ammon Manning (Plateau Group)
+So like we talked about last week before I left, so I kind of need to shift viewpoints in this first trans-credit MVP.
+That is going to be just for the general certificate input and corrections process. That's all that that MVP is going to cover because there's a lot more stuff diving down into it.
+
+ - Akop Vardanian
+That's That's MVP. MVP.
+
+ - Ammon Manning (Plateau Group)
+Kyle mentioned you had talked about a few things before because there's more things that they do when they get done.
+And so kind of our thought process was, hey, let's get this first portion written up, get it designed out, and start getting developers working on it while we're then defining the business requirements for all of the additional pieces that need to be done.
+And then once those are all done, then the development for the first part should be done, and can move on to the second part, and so forth.
+There's probably, I'm guessing, going to be maybe four or five different phases, maybe more to this entire trans-credit process.
+So, yeah, so this is kind of that phase one for just the generic certificate input verification, validation, corrections piece.
+
+ - Akop Vardanian
+Okay, this is a first phase, so, and I found out that outside features that, you know, were... In the list was like this, and I'm not sure about the status of, let's say, these modules, these features, so maybe you can clarify this, and maybe we can pick some of them to the next steps earlier now.
+So, yes, the DMZ certificate portal, so they already have that there where they can put their certificates in. That piece is already done, so there's nothing that needs to be done with that.
+
+ - Ammon Manning (Plateau Group)
+The DMZ certificate update forms, we, after talking with Erin, she said that is not going to be very feasible because they need to be, when they need to make a correction, if something was input wrong, if the file was wrong, they need to go back and product the agent, and then they need to get the actual paper copy to compare to see what the differences are.
+And if it's different, then they have to fill out a form and a letter and send it off to the client before they made it.
+The changes on our side. So it's not as simple as, you know, letting an agent log in, make their changes, and letting that flow through.
+So that is going to be a manual process for now. The OCR ingestion, that is, we already have all of the pages and everything set up for that.
+Kyle and Greg are working on the process of, well, completing that. So that's, but that's not something that you guys will need to work on and do anything with, at least not yet.
+And just kind of a side note on that. So the OCR piece right now, it gets the file in from doc management, and then there's a webpage that it shows them the certificate edit form, it copies the data from the OCR into that component.
+That one component is the same component that is being used on, on the web, the web. So can you'll
+form when they're actually creating a new certificate.
+
+ - Akop Vardanian
+So as you guys work on building out those controls, validations, and everything for mainly inputting certificates, that will also be automatically applied to that OCR ingestion piece as well.
+So that's why if you guys are focusing on writing that and getting that working, then that will also make the OCR piece work as well using the same air checks, if that makes sense.
+Okay, we can focus on this one as well, right? For the next steps, or I didn't catch it right?
+
+ - Ammon Manning (Plateau Group)
+Yeah, so when you're working on the, what is that, seven, when you're working on five, six, and seven, your work on five, six, and seven will automatically work in OCR because it's using that same shared component.
+So you don't need to do anything with that OCR, but that'll just be a byproduct of five, six, and seven.
+
+ - Akop Vardanian
+Does that make sense? Okay, let me just do. Do some notes, make some notes here, next MVP phase, like, I'm going to do something like, something like this, right?
+
+ - Yuliya Fortsel (Symfa)
+Yes, sorry for interruption, maybe let's add a note regarding the OCR that we will not work on the OCR itself, if I got it correctly.
+
+ - Akop Vardanian
+Yeah, I got it, like, it will be included in the 5, 6, and 7 feature steps.
+
+ - Ammon Manning (Plateau Group)
+Hang on a second, I apologize, I'm looking, actually, 4 and 5 are kind of the same thing. That's kind of one piece there, if I OCR extracted fields.
+Yeah, so 4 and 5, so those are, that's kind of one piece there, because the files come in, and they review them at the same time.
+And that is, the UI for that is pretty. much done. Oh, okay. So when I say done, it needs to be tested with the changes that will be made in – Oh, I see what you're looking at.
+
+ - Akop Vardanian
+You want to test it in the whole flow, right, with the whole flow when we're uploading the docs and see how it works with OCR?
+Kind of. I'm looking at number six.
+
+ - Ammon Manning (Plateau Group)
+little – I'm not going to access it. on QAPath. Better update certificates with deterministic keys. Is number six, is that just referring to the...
+
+ - Akop Vardanian
+So during the whole process, we just thought that it will work like that. So once CRR, let's say, parsed the docs, and it should be shown to the operator or to the user to verify the old information we map into the fields in the web UI.
+So the five step is about just reviewing from the user side, from the human side. Yeah, me show you...
+So I know I've shared this with a few different...
+
+ - Ammon Manning (Plateau Group)
+People, but I don't think you were on that call.
+
+ - Akop Vardanian
+You want me to stop sharing the screen? Yeah, I was going to show this to you.
+
+ - Ammon Manning (Plateau Group)
+So right now, this is we have. This is just a sample demo we did with the previous OCR piece, but it had lots of problems, so we stopped with it.
+So when the document comes in through OCR, on the right side over here is where it shows the actual physical document where all the data is being pulled from.
+
+ - Akop Vardanian
+And on the left side, it shows the values and fields that we were able to parse out. And this is where it allows them to make changes to edit it so that the OCR picked up something incorrectly that they'd be able to go over and make those changes over here.
+Mm-hmm. you.
+
+ - Ammon Manning (Plateau Group)
+So this site over here with the loan information, borrowers, and plans, this is the same component that's being used.
+So when somebody gets a paper certificate in the mail that they need to input, they come inside here to this ad certificate UI, and they pin all the information here to be able to create that certificate.
+Well, these components here are the same components that are being used over here. So as you guys are building out the error checks and the validations, making sure that this is all working good, once this is completed, then that will also, because it's sharing the same component for the OCR piece, then all your changes will also work on this OCR ingestion piece.
+
+ - Akop Vardanian
+Okay, yeah. I see. see comments.
+
+ - Ammon Manning (Plateau Group)
+So you don't need to, you're not going to be working on the OCR piece or doing anything here, you're going to be working on this one, but when you fix this one working, it's also going to work on the OCR piece, we just need to do some testing with it to make sure it works properly, but it's the same components calling the same DI and services, so it shouldn't be a problem.
+
+ - Akop Vardanian
+Can you please clarify for me, so this screen is for manual add-in certificate data, right? the one you just showed previous, that was just pairs out with the OCR?
+Correct, yeah. Okay, and how it's going to map to each other? So, or you just don't go to use the manual one, you're just going to use this one with the OCR.
+
+ - Ammon Manning (Plateau Group)
+So, it depends on how the contracts come in, because so we're not going to be switching everything to OCR from the beginning.
+We're going to be bringing on certain... Document form and doing that. So while we're doing that, some documents will be coming in OCRs.
+We're setting them up to be populated here. But there's also going to be other agents that are not going through the OCR yet.
+They'll need to be doing manual certificates here. And there are times when they need to create a manual certificate without any paper document.
+So they may still need to come inside here and create one without any supporting document behind it.
+
+ - Akop Vardanian
+Okay. Yeah, I got it. So we need to focus on not on OCR integration with this ad certification, ad certificate screen, but with validation of the field that's for manual adding the certificates, right?
+Yes. Yeah. Okay. Yeah. Good point. Makes sense. Thank you.
+
+ - Ammon Manning (Plateau Group)
+And just so you're aware, so with this, we probably have, I'd say, at least 80% of the air checks, if I had to get
+that are already done and completed on this page. So there's a lot of things that are being done, but there are also some checks that are being done in the access code that we don't know about.
+There's also some checks that are being done in the, well, the access code, some things in the access code, calls for procedures to do some additional check.
+So that's where a lot of that time will be spent on this specific part, is diving into the access pieces to pull out any additional air checks need to be done and immigrating those air checks into this new page.
+
+ - Akop Vardanian
+So, and I have to know what models exactly have been done.
+
+ - Ammon Manning (Plateau Group)
+For which part? On this page specifically?
+
+ - Akop Vardanian
+Yeah, for certificates. So if we are going to focus on this certificate flow, let's say, right? So there will be some business rules on the back of the...
+So, I'm just wondering, what is the percentage of DOM?
+
+ - Ammon Manning (Plateau Group)
+So, yeah, there's, let me, let me bring it up for a second.
+
+ - Akop Vardanian
+Okay, yeah, this is the, our certificate service, the DI service, and there, right now, we have a lot of air checks built into this that are going and checking, like I said, a ton of different things in all the different parts of the certificate.
+You know? Thank Most of these error checks are complete, but what will need to happen is we need to go into the access front end and basically kind of compare, go through all the checks, the error checks that are being done in access, and make sure that all those error checks are being done here so we have everything.
+
+ - Ammon Manning (Plateau Group)
+And if something is missing, we need to add it. I've never looked at that access code, so I can't really even give an estimate on what might be missing or how long that might take.
+I don't think it should take long because, like I said, we have a kind of error checks already in here, but that will just take somebody going through the access code, know, for sure.
+
+ - Akop Vardanian
+Okay, okay, I see. So in that case, so we will need to get access, understand what's already been done in terms of validations, and then figure out what still needs to be finished, right?
+Yep, and as far as the UI goes, I'm pretty sure that the UI...
+
+ - Ammon Manning (Plateau Group)
+Is pretty much complete. The only thing it'll need to have done to it, as we mentioned, I think it was in your other screenshot, is when there are errors or something fails validation, that those need to be saved off into the cert error table.
+But everything else on here does work and is ready. The only thing that doesn't work yet is when you click add certificate, it doesn't actually call the DI service to actually insert it into the database because we hadn't finished those other pieces yet.
+But there should be very little work that actually needs to be done on this UI itself.
+
+ - Akop Vardanian
+Okay, so we need to develop data models, right? In database tables, we need.
+
+ - Ammon Manning (Plateau Group)
+Yeah, the only database tables you should need are for the certificate errors. Everything else is already there and hooked up and working.
+
+ - Akop Vardanian
+Okay. Okay. I thought that certificate errors check-in will be out. Different service, isn't it? Yes.
+
+ - Ammon Manning (Plateau Group)
+Well, the certificate, there'll be a new certificate errors table, and then we'll need the DI service to be able to interact with that, you know, input and clear out.
+But that should be the only table, that new table that's needed, because everything else is already in the system.
+Okay.
+
+ - Akop Vardanian
+Anyway, we're going to agree with you all the architectural suggestions from our side. I got it. Yeah. So, to summarize that, I can see that it's much clearer.
+Thank you very much. Can you share that document again? Yeah. Can you see my screen? Yeah, there we go.
+
+ - Ammon Manning (Plateau Group)
+Okay, so, I think number six there, yeah, that's the part where, well, yeah. Number six, I think, is more along the lines of for the manual inputting and adding additional error checks that are missing from Access that we don't have yet on the website.
+
+ - Akop Vardanian
+And that's kind of where you'll be starting is with that. And then, yeah, the error checking service.
+
+ - Ammon Manning (Plateau Group)
+we got – oh, actually, hang on a second. It's Snapchat error logic.
+
+ - Akop Vardanian
+I don't maybe it's part of this one.
+
+ - Ammon Manning (Plateau Group)
+So maybe – I'm not sure about six because I'm wondering maybe six and seven are supposed to kind of be combined because, we're not doing Snapchat anymore.
+
+ - Akop Vardanian
+Yeah.
+
+ - Ammon Manning (Plateau Group)
+do need – and there won't be anything in the DMZ. We already – a lot of these things we already have in there.
+I think we already have that refund method. Okay, there. Yeah, so that's – that number seven is where probably you'll want to do a – probably start with things because that's where you need to go through the error logic from Access to determine everything that's – Yeah.
+
+ - Akop Vardanian
+Okay, so can we say that we need actually to focus on five, six, and seven, so because five and seven, it looks like poorly done and it still needs to be finished, and also we can start digging to certificate or checking service as another service that it's not even started yet.
+It makes sense if we have UI when we're putting some data and we're trying to fill it out with some data, so actually it makes sense to think about how we're going to validate this data, right?
+I'm just reading through the rest of these here.
+
+ - Ammon Manning (Plateau Group)
+Mm-hmm.
+
+ - Akop Vardanian
+All right.
+
+ - Ammon Manning (Plateau Group)
+Yeah, so number nine, because of how that one works, we won't be doing anything with that on the DMZ side right now, so that one will be postponed until much later, if ever.
+
+ - Akop Vardanian
+Okay, yeah, so I just kind of looked ahead at the rest of them, so yeah, so five and seven are kind of combined, they're kind of the same thing there.
+
+ - Ammon Manning (Plateau Group)
+But yeah, so it's really going to be focusing on taking the current validation error logic we have, expanding that to include anything we're missing, and then taking that information and storing it off into a new certificate error table.
+And yeah, I guess that kind of part of that is eight being able to... To show those errors and what the problems are.
+And I guess that would probably be a good spot to start with.
+
+ - Akop Vardanian
+Okay.
+
+ - Ammon Manning (Plateau Group)
+Because then after that we can dive into the agent notifications and communication. Now have you seen the other mock-ups that I did for the rest of these pieces?
+Yeah, yeah, I have seen them, yeah.
+
+ - Akop Vardanian
+Yeah, so the mock-ups it looks like you just now shared the screen, the same mock-ups. Are we talking about the same UI?
+I'm not sure maybe you can share the screen. Let's take a look one more time. Oh. Seems like you misclicked.
+
+ - Yuliya Fortsel (Symfa)
+Yeah.
+
+ - Akop Vardanian
+sure. I'm not I'm sure. I'm I'm It's okay.
+
+ - Yuliya Fortsel (Symfa)
+And you're on mute.
+
+ - Akop Vardanian
+Yeah. Yeah. I don't know why it always mutes you when you start a call. Let's go here.
+
+ - Ammon Manning (Plateau Group)
+Okay. I was like, what I said, I just, I did nothing.
+
+ - Akop Vardanian
+Okay. All right, put on the report. Yeah, so on the, on these reports, yeah, we talked about the adding certificates.
+That's what this page was. But then we also have, yeah, certain transactions.
+
+ - Ammon Manning (Plateau Group)
+don't think that to this page is pretty much done. Yeah, I think that one's done too. Oh, I haven't deployed that yet.
+Hang on. Let me run it locally.
+
+ - Akop Vardanian
+Okay. Okay. Okay. Okay, here we go. Okay. Yeah. Sorry.
+
+ - Ammon Manning (Plateau Group)
+There we go. So, yeah, so when on those cert errors table, on this page is where it's going to show all of those errors, and they can go and actually view the information about that certificate to see, you know, if they're talking to the agent, they can walk through all the problems.
+
+ - Akop Vardanian
+Yeah.
+
+ - Ammon Manning (Plateau Group)
+And then once they, once they have know what they need to do, and this part doesn't hear yet, they'll click on this, and it takes them to, it will need to be a certificate edit page.
+I haven't done anything with editing yet, but we'll the same controls to be adding, they would edit it, then once...
+They correct it, they fix it, they come back into it, save it, and then hopefully that error should be then clear while it'll be marked as cleared so it will no longer show up in the grid.
+And then, yeah, the agent communications where they're going to need to go to send emails off to the agents.
+And when they do, yeah, they'll need to include different things like the certificate errors and which certificates they want to show in that spreadsheet that they want to attach to it.
+And then some other options too. So these are, so you have the input in with the error adding up there, and then you have the error handling, and then the communication for the agents.
+Those are kind of the three big pieces we're going to start with for this very first MVP. So yeah, that's kind of, that's like the phase one.
+This is to get the bulk of what they need to do done while we're working on gathering additional requirements for all the nuances and things that they have to work through.
+Like the actual balancing and accounting in those pieces. Yeah, and as far as I know, we already work on this, right?
+
+ - Akop Vardanian
+This is what you discussed before with Alex, and you just agreed with the scope of work, like with these errors, this ad certification action.
+And Alex also told me that you already have this email model that you already worked with, so we just need to finish it.
+
+ - Ammon Manning (Plateau Group)
+Yeah, so the backend piece, I'm still working with E2 to get the thing set up we need to on that side.
+But yeah, we have the piece that will grab the emails from the table. Oh, yeah, so there are a couple other tables we need for this.
+But yeah, it'll grab those emails that need to get sent off and send them off. It'll monitor for new incoming emails, and we'll stick them in the table here.
+So yeah, that piece as far as interaction with the Exchange server, yeah, you won't need to do anything. It's just the UI and reading and writing to that one database table.
+Uh-huh. Yeah.
+
+ - Akop Vardanian
+So, you know, we're just planning to finish it quickly, actually. So, and you just said that we have to, for the next steps, we have to focus on this search review UI and error checking service, right?
+So error checking service is not even started, right? So we can focus on it at the moment.
+
+ - Ammon Manning (Plateau Group)
+It is, well, there's a lot of the logic that's needed for that error checking is done here in this value certificate, but the actual storing and reading and writing and updating to the database table for the errors, yes, that's not there yet at all.
+Okay. Yeah.
+
+ - Akop Vardanian
+Okay. I see. So also- So I make sure the business rules are there, but not the supporting infrastructure stuff.
+Yeah. Ah, yeah. I see. I see. Yeah. I got it that we can, that we can fetch the business rules.
+From here, yeah, it's a good point. So, and one more time for error summary user interface. So when we summarize all errors, and our operator have to go through this and connect to the agents, do some edits here, et cetera, et cetera.
+So what about this model? What about this service?
+
+ - Ammon Manning (Plateau Group)
+I'm sorry, which one?
+
+ - Akop Vardanian
+Error summary interface. You just show it.
+
+ - Ammon Manning (Plateau Group)
+Yeah, so that would just simply be loading up from that news error, cert error table.
+
+ - Akop Vardanian
+So this part is ready, or? No, so that's that part.
+
+ - Ammon Manning (Plateau Group)
+So that cert error table. So, like I the business logic, calculating, determining most of those errors, that's But when it actually comes to reading and writing that from the database, there is no table for that and nothing to do any of the credit operations needed for that.
+
+ - Akop Vardanian
+Okay. Okay. So also I know after you have some communications with the agents, you have to balance in it in some flows, of course.
+So what about this balancing model? So that is, yeah, that's this piece here.
+
+ - Ammon Manning (Plateau Group)
+And this is actually fully functioning and working, this part of this transaction summary. What's not working yet, and we haven't done anything with, but they need to be able to go in the hut that balance it.
+So there'll be payments that are coming and received. And this piece is actually, we haven't put this into production yet, but the code behind all of this is also here.
+What I'm still not. Entirely clear on, I have not spent time with Tanya going through, is what she does when these numbers here don't add up to what they were expecting from the agent or what they were getting back from the payment.
+That's something I still haven't spent any time to understand that, how they handle those situations. When everything adds up and it works great, yeah, it's great the way it is, but things rarely work out quite that way.
+
+ - Akop Vardanian
+Okay, thank you very much. So we're running out of time, actually, so do you want me to show something, or I can reshare my screen again and a couple of questions there?
+Yeah, sure, you can share the last few things, and then you actually... Yeah, so just to agree with some few points, so let me just...
+Make it a little bigger. Okay. I have another meeting I need to get to, so I'll keep it really short.
+Okay, yeah. I'm definitely going to send this one to you also. So what we have here, so CERT's QR review interface, so we can go through this.
+It's, of course, included, so this OCR, you show me, this manual screen when we have to put some details manually.
+So certificate error checking service, so we can focus on this one for the next step after the MVP we're already working on at the moment.
+And the next step is everything regarding this error checking. It's error summary UI, as far as I understand, correction and approval workflow.
+Balancing model is done, right? It's workable.
+
+ - Ammon Manning (Plateau Group)
+It needs to be expanded, but yes, I'll add the... Review it. We need to review it, at least.
+
+ - Akop Vardanian
+Yeah. Okay, okay, got it. Sorry. Evening, sorry. Okay, what about these notifications? And email server, email service UI, do we need these parts or we don't?
+So, because you just show that it didn't work. 14, yeah, 14 looks going to need to be coded up.
+There's just a demo of that right now.
+
+ - Ammon Manning (Plateau Group)
+13, yes, we already have the code for that. We just need to get that set up to run all the way.
+But, you know, so on 14, that's only been just the demo.
+
+ - Akop Vardanian
+Mm ... We're going to this. ... for We're
+
+ - Ammon Manning (Plateau Group)
+The dummy has been written up for that, but it still needs to be fully designed and implemented.
+
+ - Akop Vardanian
+Okay, got it up. Are we going to do this? Clarify, clarify.
+
+ - Ammon Manning (Plateau Group)
+So no, so 13, I'm doing that. We already have everything in place. I just need to finish with network services.
+14, that's the one that we only have just that demo that I threw together, but it's not reading or writing anything.
+There's no tables there. There's nothing behind it. So that's going to take a bit of time as well to do all of that.
+
+ - Akop Vardanian
+Okay, to be done. It should be done. Okay, I got it. And the last couple of these things, so I got it from this one.
+Okay, and agent notification and ops log, unification and events.
+
+ - Ammon Manning (Plateau Group)
+Yeah, everything for ops log, that's all. We're completely there with the traceability database certificate, PDFs. Oh, yeah, so we OpsLog is already there, so that can be called whenever is needed to send notifications to whoever internally.
+Okay, well, we already have this, right?
+
+ - Akop Vardanian
+Okay, I just mark it as done. Oh, are you sad about the notifications?
+
+ - Ammon Manning (Plateau Group)
+Yeah, so operations logging is the way that we use to, yeah, notify and send alerts to anyone internally for whatever happens when phases change or stages change or something that's updated or whatever.
+That's fully done, so that's ready to be called and implemented and used at any time. I'm kind of confused at the end of it now, it says certificates and PDFs are stored in ShareFox.
+That doesn't have anything to do with OpsLogging. Thank you.
+
+ - Akop Vardanian
+Great, great. Thank you. But I do need to go. They're pinging me to get on that other call. Thank you.
+Thank you very much. later today. Yeah, I got it. I got it. Everything. Thank you very much. Now I know where to dive in, in the details.
+So thank you. Thank you very much. All right. I'll see you guys. Thank you, Kyle. See you. Yep. Take care, Akop.
