@@ -797,33 +797,6 @@ This interface is a key automation component that replaces the manual "Run Snaps
 - **Agent**: Dalton Furniture, Inc. (ID: 145990)
 - **Status**: Processing errors
 
-## 🔍 Error Filtering and Management
-
-### Filter Toggle
-| Option | Description | Status |
-|--------|-------------|--------|
-| **Outstanding Errors Only** | Show only unresolved errors | ✅ Active |
-| **All Errors** | Show all errors (including resolved) | ❌ Inactive |
-
-**Functionality:**
-- Toggle between viewing modes
-- Filter by error status
-- Improved performance with large error volumes
-
-## 📊 Error Table
-
-### Table Structure
-| Column | Description | Example Values |
-|--------|-------------|----------------|
-| **CERTIFICATE** | Certificate number | 67053, 67078, 67079 |
-| **VALUE TYPE** | Error type | Premium, Missing Information, Risk Face |
-| **MESSAGE** | Detailed error description | Premium value of $540.34 is too high... |
-
-### Examples of Certificates with Errors
-- **67053** - One error type
-- **67078** - Multiple errors (4 entries)
-- **67079** - Multiple errors (4 entries)
-
 ## 🚨 Error Types in System
 
 ### 1. Premium Errors
