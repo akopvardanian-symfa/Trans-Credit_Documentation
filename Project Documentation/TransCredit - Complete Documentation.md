@@ -271,7 +271,7 @@ The TransCredit MVP is structured in multiple phases to enable incremental deliv
 
 * **MVP Phase 1 (In Progress)**: Focuses on core certificate input, validation, and editing functionality. This phase establishes the foundation for certificate management with validation logic, versioning, and basic editing capabilities. OCR integration works automatically as a byproduct of this work.
 
-* **MVP Phase 2 (Next Focus)**: Builds upon Phase 1 to add comprehensive error management and correction workflows. Priority order: Error Summary UI → Certificate Error Checking Service → Certificate Editing (Error Correction Flow) → Email Communication UI → Cert QA Review UI.
+* **MVP Phase 2 (Next Focus)**: Builds upon Phase 1 to add error visualization and correction workflows. Priority order: Error Summary UI → Certificate Editing (Error Correction Flow) → Cert QA Review UI. Note: Error Storage and Management, Email Communication UI, and Certificate Error Checking Service are already included in Phase 1.
 
 * **Future Phases**: Additional features such as Correction & Approval Workflow, Balancing Module enhancements, and other advanced capabilities will be addressed after core components are complete.
 
@@ -331,32 +331,15 @@ The MVP is divided into multiple phases. Phase 1 focuses on core certificate inp
 
 #### 🟡 MVP Phase 2 (Next Focus - Priority Order)
 
-**Priority 1: Start here**
-| Feature | Description | Status |
-|---|---|---|
-| Error Summary UI | Screen for grouped certificate errors (by type, severity) with drill-down. Loads from cert error table. This is the recommended starting point for Phase 2. | UI ready; needs cert error table |
+| Task | Feature | Description | Status |
+|---|---|---|---|
+| 1 | Error Summary UI | Screen for grouped certificate errors (by type, severity) with drill-down. Loads from cert error table. This is the recommended starting point for Phase 2. | UI ready; needs cert error table |
+| 2 | Certificate Editing (Error Correction Flow) | Integration with Error Summary UI to correct errors. When operators see errors, they click to open certificate edit page, make corrections, save, and errors are marked as cleared. Uses Phase 1 editing functionality. | Uses Phase 1 editing |
+| 3 | Cert QA Review UI | QA review of OCR data (Pass/Fail) and promotion to APS Plateau. UI is ready; needs testing with new validation logic. | UI ready; needs testing |
+| 3 | Certificate Import & Idempotency | Controlled import/update of certificates after QA Pass. Handled as part of QA Review flow. | Part of QA Review flow |
 
-**Priority 2: High priority**
-| Feature | Description | Status |
-|---|---|---|
-| Certificate Error Checking Service | Port remaining validation/error logic from Access/SQL into a C# service. Expand current validation error logic to include anything missing, then store information in new certificate error table. Approximately 80% of logic is done in DI Certificate Service; need to port remaining rules and add CertError table with CRUD operations. | Logic 80% done; needs table + CRUD |
-| Error Storage and Management | Store and manage validation errors (open/resolved). Part of Certificate Error Checking Service - implements cert error table. | Part of Error Checking Service |
 
-**Priority 3: After Error Summary UI**
-| Feature | Description | Status |
-|---|---|---|
-| Certificate Editing (Error Correction Flow) | Integration with Error Summary UI to correct errors. When operators see errors, they click to open certificate edit page, make corrections, save, and errors are marked as cleared. Uses Phase 1 editing functionality. | Uses Phase 1 editing |
 
-**Priority 4: After Editing**
-| Feature | Description | Status |
-|---|---|---|
-| Email Communication UI | UI for reading/sending emails and linking to certificates. Includes ability to attach error spreadsheets. Currently only a demo exists; needs full implementation with DB tables. | Demo exists; needs full implementation |
-
-**Priority 5: Testing & QA**
-| Feature | Description | Status |
-|---|---|---|
-| Cert QA Review UI | QA review of OCR data (Pass/Fail) and promotion to APS Plateau. UI is ready; needs testing with new validation logic. | UI ready; needs testing |
-| Certificate Import & Idempotency | Controlled import/update of certificates after QA Pass. Handled as part of QA Review flow. | Part of QA Review flow |
 
 #### ⏸️ Future Phases / Later
 
