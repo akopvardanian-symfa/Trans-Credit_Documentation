@@ -1,0 +1,78 @@
+@startuml TransCredit_Cancellation_Process
+title TransCredit Cancellation Processing (As Is)
+
+start
+
+:Receive Cancellation Request;
+note right
+  Cancellations occur when:
+  - Loan paid off early
+  - Loan charged off
+  - Loan refinanced
+  - Life claim paid (disability cancelled)
+  Received via email or monthly report
+end note
+
+:Find Certificate in System;
+note right
+  System automatically finds last certificate
+  by agent number and pre-fills information
+  Staff verifies correct certificate
+end note
+
+:Enter Cancel Date;
+note right
+  Staff enters cancellation date
+  provided by bank/agent
+end note
+
+:Calculate Premium Refund;
+note right
+  System automatically calculates
+  premium refund based on cancellation date
+  Uses refund method (pro-rata or Rule 78)
+end note
+
+:Enter Bank Refund Amount;
+note right
+  Staff enters refund amount
+  provided by bank
+end note
+
+:Tolerance Check;
+note right
+  System checks if bank amount
+  is within tolerance
+  - Within tolerance: Accept
+  - Out of tolerance: Flag as error
+end note
+
+if (Within tolerance?) then (yes)
+  :Accept Cancellation;
+  note right
+    Cancellation saved
+    Transaction Type = 20 (Cancellation)
+    Appears in C-List report
+  end note
+else (no)
+  :Flag as Error;
+  note right
+    Error appears in error list
+    Shows calculated vs bank amount
+    Staff contacts agent to resolve
+  end note
+endif
+
+:Update C-List Report;
+note right
+  Cancellation transaction added
+  to Customer List report
+  Shows refund amount and date
+end note
+
+:Complete Cancellation Processing;
+
+stop
+
+@enduml
+

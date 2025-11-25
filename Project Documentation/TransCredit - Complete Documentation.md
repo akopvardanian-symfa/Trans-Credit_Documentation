@@ -2,10 +2,43 @@
 
 ## 📋 Table of Contents
 
-1. [Business Context](#business-context)
-2. [Business Processes](#business-processes)
-3. [System Analysis (As Is)](#system-analysis-as-is)
-4. [To Be (Desired State)](#to-be-desired-state)
+1. [Glossary](#glossary)
+2. [Business Context](#business-context)
+3. [Business Processes](#business-processes)
+4. [System Analysis (As Is)](#system-analysis-as-is)
+5. [To Be (Desired State)](#to-be-desired-state)
+
+---
+
+## 📖 Glossary
+
+### Key Terms and Definitions
+
+**TransCredit System**: The primary operational application used by Plateau Group for processing credit insurance. Built on Microsoft Access frontends and SQL Server backends, it handles the business after insurance policies are sold by partner banks, finance companies, or credit unions.
+
+**E-remits (Electronic Remit)**: Data files received from finance companies that are directly loaded into the system via import. These are text data files containing transaction information (issue and cancellation transactions) that can be imported to create a batch of certificates automatically, rather than requiring manual data entry.
+
+**Issue Transaction**: The process of recording a new insurance policy. Represented as Trans Type = 10 in the system. Includes entering certificate number, customer information, loan details, plan codes, and premium amounts.
+
+**Cancellation Transaction**: The process of recording the termination of an insurance policy, often due to early loan payoff, charge-off, or refinancing. Represented as Trans Type = 20 in the system. System automatically calculates premium refund based on cancellation date.
+
+**Premium**: The amount of money the end-user pays for insurance coverage, which is financed with the loan. The end-user pays the bank, and the bank pays Plateau Group.
+
+**Commission**: A percentage of the premium that the bank retains. Commission rates vary by plan type (commonly 60%, 53%, or other rates per agent agreement). Banks typically retain commission upfront before remitting net premium to Plateau Group.
+
+**Claim**: A request made by an insured person (or their beneficiary) for payment of benefits under an insurance policy. Claims can be for life insurance (death) or disability insurance. All claim information is manually entered into the system; there are no automated integrations for claim verification with external medical databases.
+
+**Agent Summary Report**: A financial report that tallies all issue and cancellation transactions for an agent report. Shows the total issued, total canceled, net difference, retained commission by the bank, and the net amount remitted to Plateau Group. Used for balancing reports and understanding financial transactions with agent partners.
+
+**Error List**: A report generated for any discrepancies or out-of-tolerance amounts found during validation. Assists users in correcting errors and ensuring data accuracy. Generated after running snapshot validation.
+
+**Customer Letters**: Legal notifications sent to customers about policy-related information after corrections and balancing. Required by law when life/disability/AD&D coverage or premium amounts are changed. Created outside the system and sent via mail.
+
+**C-List (Customer List)**: A comprehensive table containing all issued policies for a report. Includes transaction information (trans type, dates, premiums), customer information, and coverage details. Provides complete audit trail of all transactions processed for a report.
+
+**DMZ (Demilitarized Zone) Portal**: An external, agent-facing web portal separated from the internal system. Uses Auth0 authentication (MFA) and provides secure access for agents to upload certificates and review pending reports. Currently used for certificate uploads; self-correction functionality is postponed.
+
+**RBAC (Role-Based Access Control)**: Access control system managed through Azure Active Directory groups. Roles include APS Admin (full administrative access including admin screen), Operators (main operational access for processing certificates), and Reviewers (approval workflow when implemented).
 
 ---
 
@@ -26,8 +59,16 @@
 2. **Institution offers credit insurance** to protect the loan in case of death or disability
 3. **Customer purchases insurance** as part of their loan package
 4. **Institution collects premium** from customer along with loan payments
-5. **Institution submits monthly reports** to Plateau Group with all insurance sales
-6. **Plateau Group processes** the insurance certificates and manages the policies
+5. **Commission Retention**: Bank typically retains commission upfront before remitting to Plateau Group
+6. **Institution submits monthly reports** to Plateau Group with all insurance sales
+7. **Plateau Group processes** the insurance certificates and manages the policies
+
+#### Financial Flow and Commission Structure
+- **Premium Payment**: End user pays premium to bank → bank pays Plateau Group
+- **Commission Rates**: Vary by plan type (commonly 60%, 53%, or other rates per agent agreement)
+- **Commission Retention**: Banks usually retain commission upfront, then remit net premium to Plateau
+- **Adjustment Handling**: When adjustments are needed (e.g., refunds), both Plateau and bank share the cost proportionally based on commission rate
+- **Remittance**: Banks send "agent remit" amount (total premium minus retained commission) to Plateau Group
 
 #### Where TransCredit Fits In
 **TransCredit** is the **internal processing system** used by Plateau Group to handle the monthly reports from financial institution agents. It's the system that Plateau Group uses to:
@@ -41,6 +82,8 @@
 The **TransCredit system** (used by Plateau Group) handles:
 - **Monthly Sales Reports** from financial institution agents containing certificate data
 - **Certificate Processing** including data entry, validation, and error correction
+- **Cancellation Processing** handling policy cancellations and refund calculations
+- **Claims Processing** managing insurance claims (life and disability) from insured customers
 - **Financial Balancing** between agent reports and premium remittances
 - **Agent Communication** for error resolution and billing adjustments
 - **Compliance Management** ensuring adherence to state regulations and audit requirements
@@ -52,14 +95,38 @@ The **TransCredit system** (used by Plateau Group) handles:
 ### Current Business Process (As Is)
 
 #### Process Diagram
-![TransCredit Current Process](./TransCredit%20-%20As%20Is.svg)
+![TransCredit Current Process](./TransCredit_As_Is.svg)
 
 #### Monthly Report Processing Workflow
 
 Here is the detailed step-by-step process:
 
 #### 1. **Receive Monthly Sales Report**
+
+**Current Process: Fully Manual**
+
 Banks and credit unions send monthly reports showing how many insurance policies they sold. The report contains: who bought insurance, how much they paid, what health information they provided. It also shows how much money the bank owes Plateau Group for the sold insurance policies.
+
+**How Reports Are Received:**
+- **Primary Method**: Reports are received via **email** (completely manual process)
+- **Operational Staff**: Staff member manually checks email inbox
+- **Report Formats**: 
+  - Excel files attached to emails
+  - Text data files (e-remits) attached to emails
+  - Paper documents (still common - no digital version)
+- **No Automation**: There are **no API integrations** with external systems
+- **No Automatic Processing**: Staff must manually open email, download attachments, and review contents
+
+**Report Types:**
+- **Manual Reports**: Paper documents or Excel files requiring manual data entry
+- **E-remits (Electronic Remits)**: Text data files that can be imported into the system (but import is still done manually by staff)
+- **Website Uploads**: Some agents upload reports via website (still requires manual processing)
+
+**Current Limitations:**
+- All report receipt is **100% manual** - no automated email processing
+- Staff must manually open each email and download attachments
+- No automatic routing or categorization of incoming reports
+- No integration with email systems for automatic extraction
 
 #### 2. **Assign Report Number and Description**
 Staff member logs into TransCredit system, creates a new report record and assigns it a number. The staff member gives the report an internal name based on how it was received:
@@ -71,7 +138,49 @@ Staff member logs into TransCredit system, creates a new report record and assig
 This internal naming helps staff immediately identify how each report was received and processed.
 
 #### 3. **Enter Certificate Information into TransCredit System**
+
 Staff member enters data for each insurance certificate into the system. If a certificate has no number (bank's printing problem), they use the last 4 digits of SSN. They notify agent services about the printing issue so they can contact the bank and fix the printing problem.
+
+**Data Entry Methods:**
+
+**Method A: Manual Entry (Manual Reports)**
+- Staff member manually opens email attachment (Excel file) or paper document
+- Staff reviews data in the file/document
+- Staff manually enters each certificate through Access forms
+- Staff builds up a batch of certificates manually
+- Process includes fact-checking during manual input (e.g., maximum term, number of customers for single plan type)
+
+**Method B: E-remit Import (Electronic Remits)**
+- Staff member receives email with text data file attachment
+- Staff manually downloads the e-remit file
+- Staff manually imports the file into the system via import function
+- System automatically creates a batch from the imported file
+- Batch is then processed (but import itself is still done manually by staff)
+
+**Note**: Even for e-remits, the import process is **manual** - staff must manually trigger the import. There is no automatic processing of incoming emails or automatic file import.
+
+**Certificate Data Entry Fields:**
+- **Certificate Number**: From agent (or last 4 digits of SSN if missing)
+- **Branch**: Bank/credit union branch (optional)
+- **Officer Initials**: Loan officer initials (optional)
+- **Issue Date**: Date when certificate was issued
+- **Maturity**: Either maturity date OR term (number of payments) - mutually exclusive
+- **Loan Type**: Usually pulled in from e-remits, not manually entered
+- **Amount Financed**: Loan amount
+- **Interest Rate**: Loan interest rate
+- **Balloon Loan Indicator**: If final payment is greater than normal payment amount
+- **Form Information**: State-specific form identifier (e.g., Alabama form)
+- **Customer Information**: First name, last name, SSN, date of birth (auto-calculates age)
+- **Secondary Borrower**: If applicable, secondary borrower information
+- **Plan Codes**: Different insurance products (single/joint life, disability, property, auto)
+  - Single level life, Joint level life
+  - Single net pay life, Joint net pay life
+  - Single seven-day disability, Single 30-day disability
+  - Dual interest personal property
+  - Single interest auto
+  - Regular vehicle physical damage
+  - Forced place vehicle physical damage
+- **Multiple Plans**: Can add multiple plans (plan 1, plan 2, plan 3) to same certificate
 
 **Important**: Data is entered exactly as printed, even if they know it's wrong.
 
@@ -149,6 +258,142 @@ Scan all documents together for archive:
 #### 11. **Complete Monthly Report Processing**
 Monthly report processing is completed.
 
+### Data Output
+
+The TransCredit system generates several key outputs during and after report processing:
+
+#### 1. **Agent Summary Report**
+
+**Purpose**: Financial summary that tallies all issue and cancellation transactions for an agent report.
+
+**Contents**:
+- **Total Issued**: Sum of all issue transactions (new policies)
+- **Total Canceled**: Sum of all cancellation transactions
+- **Net Difference**: Difference between issued and canceled amounts
+- **Retained Commission**: Commission amount kept by the bank
+- **Net Amount Remitted**: Final amount sent to Plateau Group (total premium minus retained commission)
+- **Level 2 Commission**: Rare commission type, if applicable
+
+**Usage**:
+- Helps in balancing reports
+- Understanding financial transactions with agent partners
+- Verifying that calculations match agent's reported amounts
+- Determining final remittance amount
+
+**When Generated**: After all transactions (issues and cancellations) are entered and processed.
+
+#### 2. **Error List**
+
+**Purpose**: Report generated for any discrepancies or out-of-tolerance amounts found during validation.
+
+**Contents**:
+- List of all validation errors found during snapshot validation
+- Error types (age limits, premium calculations, coverage amounts, refund methods, etc.)
+- Certificate numbers with errors
+- Specific error descriptions
+- Calculated vs. reported amounts (for tolerance violations)
+
+**Usage**:
+- Assists users in correcting errors
+- Ensures data accuracy
+- Guides staff in identifying which certificates need correction
+- Used for communication with agents about discrepancies
+
+**When Generated**: After running "Run Snapshot" validation process. Can be regenerated after corrections are made.
+
+**Error Types Include**:
+- Age limit violations
+- Premium calculation errors
+- Coverage amount mistakes
+- Refund method errors (pro-rata vs Rule 78)
+- Platform provider errors
+- Printing errors
+- Multiple policy violations
+
+#### 3. **Customer Letters**
+
+**Purpose**: Legal notifications sent to customers about policy-related information after corrections and balancing.
+
+**When Required**:
+- **Legal Requirement**: Must be sent when life/disability/AD&D coverage or premium amounts are changed
+- After corrections are made that affect customer's policy
+- When coverage is reduced due to limit exceedances
+- When premium adjustments are made
+
+**Contents**:
+- Notification of changes to policy
+- Explanation of corrections made
+- Updated coverage or premium information
+- Legal compliance language
+
+**Process**:
+- Letters are created **outside the system** (not generated by TransCredit)
+- Manually composed and formatted
+- Printed and mailed to customers
+- Required for legal compliance
+
+**Note**: Customer letters are a crucial output for notifying customers about policy-related information after corrections and balancing, ensuring legal compliance with insurance regulations.
+
+### Cancellation Processing
+
+#### Process Diagram
+![TransCredit Cancellation Process](./TransCredit_Cancellation_Process.svg)
+
+#### When Policies Are Cancelled
+Cancellations occur for various reasons:
+- **Loan paid off early**: Customer pays loan before maturity
+- **Loan charged off**: Bank writes off the loan as uncollectible
+- **Refinanced**: Loan refinanced into new loan
+- **Life claim paid**: When life claim is paid, disability plan is cancelled
+
+#### Cancellation Workflow
+1. **Find Certificate**: System automatically finds last certificate by agent number and pre-fills certificate information
+2. **Enter Cancel Date**: Staff enters cancellation date
+3. **Automatic Refund Calculation**: System calculates premium refund based on cancellation date
+4. **Enter Bank Amount**: Staff enters refund amount provided by bank
+5. **Tolerance Check**: System checks if bank amount is within tolerance:
+   - **Within tolerance**: System accepts the amount
+   - **Out of tolerance**: System flags as error (will show in error list)
+6. **Error Handling**: If refund amount exceeds original premium or is significantly different, error appears in error list with calculated amount
+
+**Note**: Cancellations are processed as transactions (trans type = 20) and appear in the C-List (Customer List) report.
+
+### Transaction Processing and C-List
+
+#### C-List (Customer List) Report
+The C-List is a comprehensive table containing all issued policies for a report. It includes:
+
+**Transaction Information:**
+- **Agent Information**: Agent number and details
+- **Certificate**: Certificate number
+- **Cert ID**: Internal certificate identifier
+- **Plan Code**: Insurance plan type
+- **Trans Type**: 
+  - 10 = Issue (new policy)
+  - 20 = Cancellation
+- **Trans Date**: Effective date of transaction
+- **Trans Premium**: Amount collected (for issues) or refunded (for cancellations)
+- **Trans RYM**: Reporting Year Month (when transaction was reported)
+
+**Customer Information:**
+- **Primary/Secondary Indicators**: P = Primary, S = Secondary
+- **Customer Name**: First and last name
+- **SSN**: Social Security Number
+- **Date of Birth**: Customer birth date
+- **Age**: Auto-calculated from DOB
+
+**Coverage Details:**
+- **Risk Codes**: Risk classification
+- **State**: State where policy is issued
+- **Risk Forms**: Form identifiers
+- **Benefit Amount**: Insurance coverage amount
+- **Premium Amount**: Premium charged
+- **Commission Rates**: Varies by plan (e.g., 60%, 53%)
+- **Issue Date**: When policy was issued
+- **Maturity Date**: When policy matures
+
+**Purpose**: The C-List provides complete audit trail of all transactions processed for a report, used for balancing, reporting, and compliance.
+
 ### Error Correction Process (Detailed)
 
 #### Common Error Types
@@ -169,22 +414,144 @@ Monthly report processing is completed.
 6. **Notify Agent**: Send billing statement and explanations
 7. **Notify Customer**: If life/disability/AD&D changed (legal requirement)
 
+### Claims Processing Workflow
+
+Claims processing is a separate module within the TransCredit Access frontend. This process handles insurance claims from insured customers when death or disability occurs.
+
+#### 1. **Receive Claim Information**
+Claims are received from agents (banks) through various channels:
+- **Claim Form**: Completed claim form submitted by customer/agent
+- **Email**: Claim information sent via email
+- **Fax**: Claim documents faxed to Plateau Group
+- **ShareFile**: Documents uploaded to ShareFile system
+- **Physical Mail**: Paper documents sent by mail
+
+**Note**: There are no API integrations for claims. All claim information is manually entered into the system.
+
+#### 2. **Search for Customer Coverage**
+Staff must first locate the customer's active insurance certificate in the system. Search options include:
+- **Social Security Number (SSN)**: Search by full or partial SSN
+- **Name**: Search by customer first and last name
+- **Existing Claim**: Search if customer already has a claim
+- **Certificate Number**: Search by certificate number
+
+**Verification Steps:**
+- Verify certificate status = 1 (active)
+- Check issue date matches
+- Confirm customer information matches claim form
+- View certificate details to ensure correct person
+
+#### 3. **Create Claim Record**
+Once correct certificate is identified:
+- **Select Plan Type**: Choose Life or Disability plan (certificate may have multiple plans)
+- **Automatic Claim Number**: System automatically assigns unique claim number
+- **Claim Date**: 
+  - For Life claims: Date of death
+  - For Disability claims: Date disability began
+- **File Date**: Automatically set to today's date (date claim was filed)
+
+#### 4. **Enter Claim Details**
+Staff enters comprehensive claim information:
+
+**Basic Information:**
+- **Reason for Death/Disability**: Select from predefined codes
+- **Occupation**: Customer's occupation
+- **Lien Holder**: 
+  - Search for existing lien holder in system
+  - If not found, add new lien holder
+- **Cause**: Specific cause of death or disability
+- **Loan Number**: Loan number associated with the certificate
+
+**Customer Information:**
+- **Primary/Secondary Indicator**: P = Primary, S = Secondary (must match certificate)
+- **Address**: Customer address
+- **Phone Number**: Contact information (if available)
+
+**Additional Fields:**
+- Some fields are rarely used but available if needed
+
+#### 5. **Claim Verification Process**
+
+**Life Claims:**
+- **Required Documentation**: Death certificate must be provided
+- **Manual Verification**: Staff manually reviews death certificate
+- **Fraud Detection**: If claim looks suspicious, staff contacts relevant parties to verify
+- **Verification Methods**: 
+  - Review death certificate authenticity
+  - Check for stamps, official seals
+  - Verify information matches claim form
+
+**Disability Claims:**
+- **Required Documentation**: Doctor's section must be completed
+- **Manual Verification**: Staff reviews doctor's completion
+- **Verification Indicators**:
+  - Doctor's office stamp
+  - Professional formatting
+  - Medical records (if provided)
+- **Fraud Detection**: If suspicious, staff contacts doctor's office to verify
+- **Verification Methods**:
+  - Review doctor's handwriting and stamps
+  - Verify physician information
+  - Contact doctor's office if needed
+
+**Note**: There is no automated integration with federal medical databases or death registries. All verification is manual.
+
+#### 6. **Save and Process Claim**
+- **Save Claim**: Click save button to store claim in database
+- **Print Privacy Statement**: System can print privacy statement to mail to customer (legal requirement)
+- **Claim Appears on Certificate**: Once saved, claim is visible on certificate record
+
+#### 7. **Claim Payment Process**
+- **Payment Method**: Claims are paid through the bank (agent), not directly to customer
+- **Bank Receives Payment**: Plateau Group pays bank, bank then pays customer
+- **Payment Tracking**: Payment information tracked in system
+
+#### 8. **Claim Management**
+- **Update Claims**: Staff can update claim information if additional details are received
+- **Correct Errors**: If wrong claim date or codes entered, staff can correct and save
+- **Delete Claims**: Claims can be deleted if entered incorrectly (within same month)
+- **View Claim History**: All claims associated with certificate are visible
+
+**Business Rules:**
+- Each certificate can have multiple claims (e.g., life claim and disability claim)
+- Claims are permanently associated with certificate
+- Claim number is unique and automatically generated
+- All claim data is stored in claim master table
+
 ---
 
 ## 🏗️ System Analysis (As Is)
 
 ### Technology Stack Overview
-- **Frontend**: Excel-based interface for data input and search
-- **Backend**: MS Access database with VBA code and stored procedures
+- **Frontend**: Microsoft Access frontends (separate applications for TransCredit, Term Life, Group Mortgage)
+- **Backend**: SQL Server databases with shared tables (cert master, cert names, cert)
+- **Modules**: TransCredit includes Certificate Processing and Claims Processing modules within same Access frontend
 - **Communication**: Email-based with no integrated tracking
 - **Manual Processes**: 95% of operations require manual intervention
+
+**System Architecture Notes:**
+- **Separate Frontends**: TransCredit, Term Life, and Group Mortgage are separate Access frontend applications
+- **Shared Database Tables**: All three systems use common tables (cert master, cert names, cert) for consistency
+- **Historical Context**: Term Life and Group Mortgage were created in 2014-2015 as copies of APS TransCredit, customized for their specific workflows
+- **Consolidation Plans**: Term Life and Group Mortgage will be combined back into TransCredit as modules within a unified frontend
+- **Database Structure**: Main tables are consistent across all four databases (TransCredit, Term Life, Group Mortgage, Extend Plus, PTS)
 
 ### Technology Used for Each Business Process Step
 
 #### 1. Receive Monthly Sales Report
 - **Technology**: Email system, physical mail, website uploads
-- **Process**: Manual receipt and sorting of reports
+- **Process**: **Fully manual** receipt and sorting of reports
+  - Staff manually checks email inbox
+  - Staff manually opens each email
+  - Staff manually downloads attachments (Excel files, text files)
+  - Staff manually reviews file contents
+  - **No automated email processing**
+  - **No API integrations** with external systems
 - **Tools**: Email clients, physical mail handling, website interface
+- **Current Limitations**: 
+  - 100% manual process - no automation
+  - No automatic email routing or categorization
+  - No integration with email systems for automatic extraction
 
 #### 2. Assign Report Number and Description
 - **Technology**: MS Access database
@@ -192,10 +559,21 @@ Monthly report processing is completed.
 - **Tools**: Access forms for data entry, internal naming system
 
 #### 3. Enter Certificate Information into TransCredit System
-- **Technology**: MS Access database with Excel interface
-- **Process**: Manual data entry from certificates
-- **Tools**: Excel-based forms, Access database tables
-- **Data Sources**: Certificate numbers, SSN (last 4 digits), customer information
+- **Technology**: MS Access database with Access forms
+- **Process**: Manual data entry from certificates or imported data files
+- **Tools**: Access forms for data entry, Access database tables
+- **Data Sources**: 
+  - **Manual entry**: Certificate numbers, SSN (last 4 digits), customer information
+    - Staff manually opens email attachment (Excel file) or paper document
+    - Staff reviews data and manually enters through Access forms
+    - Staff builds batch manually
+  - **E-remit import**: Text data files imported into system
+    - Staff manually downloads e-remit file from email
+    - Staff manually triggers import function
+    - System automatically creates batch from imported file
+    - **Note**: Even e-remit import is manual - staff must manually trigger it
+- **Import Capability**: Can import data files which create batch automatically, but import process itself is manual
+- **Fact-Checking**: System performs fact-checking during manual input (e.g., maximum term, number of customers for single plan type)
 
 #### 4. Check Health Questions Status
 - **Technology**: MS Access database with VBA code
@@ -250,12 +628,90 @@ Monthly report processing is completed.
 - **State Regulations**: Manual handling required for North Carolina ("net plus three") and Kentucky (county taxes)
 - **Agent Platform Issues**: Wrong refund methods, printing errors, platform provider problems
 
+### Database Behavior
+
+#### Data Persistence
+- **Save Mechanism**: Data is saved to SQL Server database only when user clicks "Save" button
+- **No Auto-Save**: There is no automatic saving while form is open
+- **Data Loss Risk**: If user exits without saving, data must be re-entered
+- **Recovery**: If system crashes before save, user must restart from beginning of that step
+
+#### Data Versioning
+- **No Transaction History**: System does not maintain version history of changes
+- **Direct Updates**: Changes update the original record directly (no separate version records)
+- **Exception**: Additional payments create new transaction records, but claim master and certificate data update original records
+- **Audit Limitation**: Cannot see what data was before a change was made (no before/after comparison)
+
+#### Data Protection
+- **Delete Restrictions**: Claims can only be deleted within the same month they were created
+- **Update Capability**: Staff can update claim information if additional details are received
+- **Error Correction**: If wrong information entered, staff can correct and save
+
+### External Integrations
+
+#### Data Input Methods
+- **No API Integrations**: System does not have API connections with banks or external systems
+- **Fully Manual Report Receipt**: 
+  - Reports received via **email** (100% manual - staff manually checks inbox, opens emails, downloads attachments)
+  - Staff manually reviews Excel files or text files
+  - **No automated email processing** - no automatic extraction or routing
+  - **No automatic file import** - even e-remits require manual trigger by staff
+- **Manual Entry**: Primary method for certificate data entry
+  - Staff manually opens email attachments or paper documents
+  - Staff manually enters data through Access forms
+  - Staff manually builds batches
+- **File Import (E-remits)**: 
+  - E-remit text files can be imported (creates batch automatically)
+  - **But import is still manual** - staff must manually download file and trigger import
+  - No automatic processing of incoming e-remit files
+- **Email**: Claims and corrections received via email (manually processed)
+- **Fax**: Claim documents received via fax (manually entered)
+- **ShareFile**: Documents uploaded to ShareFile (manually processed)
+- **Physical Mail**: Paper documents received by mail (manually entered)
+
+#### Verification Systems
+- **No Automated Verification**: No integration with federal medical databases or death registries
+- **Manual Verification Only**: All claim verification is done manually by staff
+- **Document Review**: Staff reviews physical documents (death certificates, doctor forms)
+- **Phone Verification**: Staff may call doctor's offices or other parties to verify claims
+
+### Commission and Premium Flow
+
+#### Financial Flow Structure
+1. **End User → Bank**: Customer pays premium to bank along with loan payment
+2. **Bank → Plateau Group**: Bank pays Plateau Group (usually retains commission upfront)
+3. **Commission Retention**: Bank typically keeps commission portion upfront before remitting to Plateau
+
+#### Adjustment Calculations
+When adjustments are made (e.g., $50 due back to customer):
+- **Total Adjustment**: $50
+- **Commission Split**: If commission rate is 50%:
+  - **Plateau Provides**: $25 (50% of adjustment)
+  - **Bank Provides**: $25 (50% of adjustment)
+- **Customer Receives**: Full $50 adjustment applied to loan
+
+#### Commission Rates
+- **Variable Rates**: Different commission rates apply to different plan types
+- **Common Rates**: 60%, 53% (varies by plan and agent agreement)
+- **Level 2 Commission**: Rare commission type, but exists in system
+- **Retained Commission**: Bank retains commission upfront, remits net premium to Plateau
+
+#### Remittance Process
+- **Agent Remit**: Amount bank sends to Plateau after retaining commission
+- **Net Calculation**: Total premium minus retained commission equals agent remit
+- **Balancing**: System balances report totals against remittance amounts
+
 ### Operational Challenges
+- **Fully Manual Report Receipt**: 100% manual process - staff must manually check email, download attachments, and review files. No automated email processing or API integrations.
 - **Manual Error Correction**: 95% of time spent on corrections
+- **Manual Data Entry**: Even e-remit imports require manual trigger by staff - no automatic processing
 - **Limited Search Capabilities**: Basic search by certificate number, SSN, customer name
-- **Inadequate Audit Trail**: High-level logging without detailed change tracking
+- **Inadequate Audit Trail**: High-level logging without detailed change tracking (no version history)
 - **Email Communication**: No integrated tracking of agent communications
 - **State-Specific Rules**: Manual notes required for different state regulations
+- **No Data Versioning**: Cannot track changes over time or see historical data states
+- **Manual Claims Verification**: No automated verification systems for claims
+- **No Automated Report Processing**: Reports must be manually opened, reviewed, and processed by staff
 
 ---
 
@@ -408,8 +864,6 @@ The MVP is divided into multiple phases. Phase 1 focuses on core certificate inp
 # Appendix: Prototype Overview – Complete Interface Documentation
 
 <!-- The following content is inserted verbatim from Prototype Overview/Complete-Interface-Documentation.md -->
-
-# TransCredit Prototype Overview - Interface Documentation
 
 ## 📋 Overview
 This document contains detailed descriptions of all TransCredit prototype interfaces, demonstrating the transition from the outdated MS Access/Excel system to a modern web application with automated error processing and improved agent communication.

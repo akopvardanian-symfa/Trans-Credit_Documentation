@@ -1,10 +1,24 @@
-@startuml
+@startuml TransCredit_As_Is_Process
 title TransCredit Insurance Certificate Processing Business Process Flow
 
 start
 
 :Receive Monthly Sales Report;
 note right
+  FULLY MANUAL PROCESS - 100% Manual
+  Actor: Operational Staff
+  Process:
+  - Staff manually checks email inbox
+  - Staff manually opens each email
+  - Staff manually downloads attachments
+  - Staff manually reviews file contents
+  NO AUTOMATION: No API integrations, no automatic email processing
+  
+  Report Formats:
+  - Excel files attached to emails
+  - Text data files (e-remits) attached to emails
+  - Paper documents (still common)
+  
   Contains:
   - Bank's monthly insurance sales
   - Certificate data (life/disability coverage)
@@ -25,6 +39,22 @@ end note
 
 :Enter Certificate Information into TransCredit System;
 note right
+  TWO METHODS OF DATA ENTRY:
+  
+  METHOD A: Manual Entry (Manual Reports)
+  - Staff manually opens email attachment (Excel) or paper document
+  - Staff reviews data in file/document
+  - Staff manually enters each certificate through Access forms
+  - Staff builds batch manually
+  - Fact-checking during manual input
+  
+  METHOD B: E-remit Import (Electronic Remits)
+  - Staff receives email with text data file attachment
+  - Staff manually downloads e-remit file
+  - Staff manually triggers import function
+  - System creates batch automatically from imported file
+  NOTE: Even e-remit import is MANUAL - staff must trigger it
+  
   CRITICAL: Enter data exactly as printed
   regardless of whether it's correct or not
   - Use certificate number if available
@@ -169,16 +199,59 @@ else (no)
   :Within Coverage Limits;
 endif
 
+:Generate Agent Summary Report;
+note right
+  Financial summary report showing:
+  - Total Issued (sum of issue transactions)
+  - Total Canceled (sum of cancellation transactions)
+  - Net Difference
+  - Retained Commission (kept by bank)
+  - Net Amount Remitted to Plateau Group
+  Used for balancing and understanding
+  financial transactions with agents
+end note
+
+:Generate Error List;
+note right
+  Report generated after snapshot validation
+  Shows all validation errors:
+  - Age limit violations
+  - Premium calculation errors
+  - Coverage amount mistakes
+  - Refund method errors
+  - Platform provider errors
+  - Printing errors
+  - Multiple policy violations
+  Used for error correction and
+  communication with agents
+end note
+
+:Generate Customer Letters;
+note right
+  Legal notifications (created outside system)
+  Required when:
+  - Life/disability/AD&D coverage changed
+  - Premium amounts changed
+  - Coverage reduced due to limits
+  Manually composed, printed, and mailed
+  Required for legal compliance
+end note
+
 :Print Report;
 note right
   Print the main report
   showing financial balance
 end note
 
-:Print Customer List;
+:Print Customer List (C-List);
 note right
-  Create list of all customers
-  on this report
+  Comprehensive table showing:
+  - All transactions (Issue/Cancellation)
+  - Customer information
+  - Coverage details
+  - Transaction dates and premiums
+  - Commission rates
+  Complete audit trail for report
 end note
 
 :Scan All Documents Together;
